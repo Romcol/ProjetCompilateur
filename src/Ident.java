@@ -1,4 +1,4 @@
 
-public class Ident {
-
+abstract public class Ident {
+	
 }
