@@ -11,6 +11,7 @@ public class TabIdent {
 		return table.containsKey(clef);
 	}
 	public void rangeIdent(String clef, Ident id){
+		//Ident id = new Ident();
 		table.put(clef, id);
 	}
 }
