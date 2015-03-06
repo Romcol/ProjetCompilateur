@@ -17,7 +17,7 @@ PARSER_BEGIN(Yaka)
 
 
 
-public class Yaka {
+public class Yaka implements Constants {
 	public static Declaration declaration;
 	public static TabIdent tabIdent;
 	public static Expression expression;
@@ -160,32 +160,32 @@ void defConst() : {}
 {
 	
   <ident>  	  	
-   "=" valConst(identLu)
+   "=" valConst() {declaration.setCurrentIdent(YakaTokenManager.identLu);}
     
 }
 
 void valConst(String theIdent) : {}{
-  <entier>	{definition.defConstEntier(theIdent, entierLu);}
- | <ident>	{definition.defConstIdent(theIdent, identLu);}
- | <VRAI> 	{definition.defConstBool(theIdent, true);}
- | <FAUX> 	{definition.defConstBoll(theIdent, false);}
+  <entier>	{declaration.defConstEntier(YakaTokenManager.entierLu);}
+ | <ident>	{declaration.defConstIdent(YakaTokenManager.identLu);}
+ | <VRAI> 	{declaration.defConstBool(-1);}
+ | <FAUX> 	{declaration.defConstBool(0);}
 }
 
 
 void declVar() : {}
 {
-  <VAR> type()	
-  <ident>		
+  <VAR> type()
+  <ident> {declaration.defVar(YakaTokenManager.identLu);}
   ("," 
-      <ident>  
+      <ident>  {declaration.defVar(YakaTokenManager.identLu);}
   )* ";"
 	
 }
 
-void type() :{}
+type() :{}
 {
-   <ENTIER> 			
- | <BOOLEEN>	
+   <ENTIER> { declaration.setCurrentType(ValueType.ENTIER);}
+ | <BOOLEEN> { declaration.setCurrentType(ValueType.BOOLEEN);}
 }
 /*
  * Syntaxe des instructions.

@@ -1,8 +1,11 @@
 
 public class IdVar extends Ident {
 	private int offset;
-	public IdVar(int type, String name, int valueType, int offset){
-		super(type, name, valueType);
+	public IdVar(String name, ValueType valueType, int offset){
+		super(name, valueType);
 		this.offset = offset;
+	}
+	public boolean isConst(){
+		return false;
 	}
 }

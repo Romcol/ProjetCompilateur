@@ -1,13 +1,41 @@
-
-public class Declaration {
-	
-	public void defConstEntier(String ident, int entier){
-		//Yaka.tabIdent.rangeIdent(
+public class Declaration implements Constants{
+	private ValueType currentType;
+	private String currentIdent;
+	private int currentOffset = -2;
+	public void defConstEntier(int entier){
+		IdConst idconst = new IdConst(currentIdent, ValueType.ENTIER, entier);
+		Yaka.tabIdent.rangeIdent(currentIdent, idconst);
 	}
-	public void defConstIdent(String ident1, String ident2){
-		
+	public void defConstIdent(String ident1){
+		if(Yaka.tabIdent.existeIdent(ident1))
+		{
+			IdConst ident = (IdConst) Yaka.tabIdent.chercheIdent(ident1);
+			IdConst idconst = new IdConst(currentIdent, ident.getValueType(), ident.getValue());
+			Yaka.tabIdent.rangeIdent(currentIdent, idconst);
+		}
+		else{
+			System.out.println("Ident "+ident1+" not found.");
+		}
 	}
-	public void defConstBool(String ident, boolean value){
-		
+	public void defConstBool(int value){
+		IdConst idconst = new IdConst(currentIdent, ValueType.BOOLEEN, value);
+		Yaka.tabIdent.rangeIdent(currentIdent, idconst);
+	}
+	public ValueType getCurrentType() {
+		return currentType;
+	}
+	public void setCurrentType(ValueType currentType) {
+		this.currentType = currentType;
+	}
+	public String getCurrentIdent() {
+		return currentIdent;
+	}
+	public void setCurrentIdent(String currentIdent) {
+		this.currentIdent = currentIdent;
+	}
+	public void defVar(String identName){
+		Ident newIdent = new IdVar(identName, currentType, currentOffset);
+		currentOffset -= 2;
+		Yaka.tabIdent.rangeIdent(identName, newIdent);
 	}
 }

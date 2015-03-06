@@ -1,17 +1,13 @@
 
-abstract public class Ident {
-	private enum Type {
-		VARIABLE, CONSTANTE
+abstract public class Ident implements Constants{
+	protected String name;
+	protected ValueType valueType;
+	public ValueType getValueType(){
+		return valueType;
 	}
-	private Type type;
-	private String name;
-	private enum ValueType {
-		BOOLEAN, ENTIER
-	}
-	private ValueType valueType;
-	public Ident(int type, String name, int valueType){
-		this.type = type;
+	public Ident(String name, ValueType valueType){
 		this.valueType = valueType;
 		this.name = name;
 	}
+	public abstract boolean isConst();
 }
