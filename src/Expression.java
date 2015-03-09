@@ -1,37 +1,46 @@
 import java.util.Stack;
 
 
-public class Expression {
+public class Expression implements Constants{
 	
-	private Stack pileval= new Stack();
-	private Stack pileop= new Stack();
+	private Stack pileType= new Stack();
+	private Stack pileOp= new Stack();
 	
-	public void ajoutepileop(char c){
-		pileop.add(c);
-	}
-	public void ajoutepileval(char c){
-		pileval.add(c);
-	}
-	public void effectueOperation(){
-		switch(pileop.pop()){
-		 case '+' :
-		 pileop.add(pileval.pop()+pileval.pop());
-	 	case '-' :
-	 	float val = pileval.pop();
-	 	pileop.add(pileval.pop()-val);
-	 	case '*' :
-	 	pileop.add(pileval.pop()*pileval.pop());
-	 	case '/' :
-	 	float val = pileval.pop();
-	 	pileop.add(pileval.pop()/val);
+	public void eval(){
+		String op = pileOp.pop();
+		char type1 = pileType.pop();
+		char type2 = pileType.pop();
+		if(type1 == type2)
+		{
+			switch(op){
+			case '+' :
+			case '-' :
+			case '*' :
+			case '/' :
+			case '<' :
+			case '>' :
+			case '<=' :
+			case '>=' :
+			if(type1 != ValueType.ENTIER) 
+			{
+				System.out.println("Erreur dans le calcul de l'expresion.");
+			}
+			break;
+			case 'et' :
+			case 'ou' :
+			if(type1 != ValueType.BOOLEEN) 
+			{
+				System.out.println("Erreur dans le calcul de l'expresion.");
+			}
+			break;
+		}
+		else{
+			System.out.println("Erreur dans le calcul de l'expresion.");
 		}
 	}
-	public void negatif(){
-		float val = pileval.pop();
-		pileval.add(-val);	
+	
+	public void stack(){
+		
 	}
-	public void afficher(){
-		Sytem.out.println(pileval.pop());	
 	}
-
 }

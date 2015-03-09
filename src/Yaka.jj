@@ -202,7 +202,7 @@ void expression() : {}
 {
   simpleExpr() 
   (opRel() 
-  simpleExpr() 
+  simpleExpr() {expression.eval();}
   )?
 }
 
@@ -235,21 +235,21 @@ void primaire (): {}
 }
 
 void valeur () : {}
-{ <entier> 		
- | <ident> 		
- | <VRAI> 		
- | <FAUX> 		
+{ <entier> 	{expression.pushType(ValueType.ENTIER);}	
+ | <ident> 	{expression.pushType(identLu);}
+ | <VRAI> 	{expression.pushType(ValueType.BOOLEEN);}	
+ | <FAUX> 	{expression.pushType(ValueType.BOOLEEN);}
  
 }
 
 void opRel() : {}
 {
-   "=" 		
- | "<>" 	
- | "<" 		
- | "<=" 	
- | ">" 		
- | ">=" 	
+   "=" 		{expression.pushOp('=');}
+ | "<>" 	{expression.pushOp('<>');}
+ | "<" 		{expression.pushOp('<');}
+ | "<=" 	{expression.pushOp('<=');}
+ | ">" 		{expression.pushOp('>');}
+ | ">=" 	{expression.pushOp('>=');}
 } 
 
 void opAdd() : {}
