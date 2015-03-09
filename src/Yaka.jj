@@ -206,15 +206,14 @@ void expression() : {}
   )?
 }
 
-
-
 void simpleExpr() : {}
 {
    terme() 
    (opAdd() 
    terme()	
    )*
-} 
+}
+
 void terme() : {}
 {
   facteur() 
@@ -231,7 +230,6 @@ void primaire (): {}
 {
    valeur()
  | "(" expression() ")" 
- 
 }
 
 void valeur () : {}
@@ -239,36 +237,35 @@ void valeur () : {}
  | <ident> 	{expression.pushType(identLu);}
  | <VRAI> 	{expression.pushType(ValueType.BOOLEEN);}	
  | <FAUX> 	{expression.pushType(ValueType.BOOLEEN);}
- 
 }
 
 void opRel() : {}
 {
-   "=" 		{expression.pushOp('=');}
- | "<>" 	{expression.pushOp('<>');}
- | "<" 		{expression.pushOp('<');}
- | "<=" 	{expression.pushOp('<=');}
- | ">" 		{expression.pushOp('>');}
- | ">=" 	{expression.pushOp('>=');}
+   "=" 		{expression.pushOp(Operation.EQUAL);}
+ | "<>" 	{expression.pushOp(Operation.NEQUAL);}
+ | "<" 		{expression.pushOp(Operation.INF);}
+ | "<=" 	{expression.pushOp(Operation.INFEQ);}
+ | ">" 		{expression.pushOp(Operation.SUP);}
+ | ">=" 	{expression.pushOp(Operation.SUPEQ);}
 } 
 
 void opAdd() : {}
 {
-    "+"		
-  |  "-"  
-  | <OU> 	
+    "+"		{expression.pushOp(Operation.PLUS);}
+  |  "-"	{expression.pushOp(Operation.MINUS);}
+  | <OU>	{expression.pushOp(Operation.OR);}
 }
 
 void opMul() : {}
 {
-  "*"		
-  | "/"		
-  | <ET>	
+  "*"		{expression.pushOp(Operation.MUL);}
+  | "/"		{expression.pushOp(Operation.DIV);}
+  | <ET>	{expression.pushOp(Operation.AND);}
 } 
 
 void opNeg() : {}
 { "-" 		
- | <NON>	
+ | <NON>	{expression.pushOp(Operation.NOT);}
 }
 
 
