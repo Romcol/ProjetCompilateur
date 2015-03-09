@@ -20,22 +20,40 @@ public class Expression implements Constants{
 				case MINUS :
 				case MUL :
 				case DIV :
+					if(type1 != ValueType.ENTIER) 
+					{
+						System.out.println("Erreur dans le calcul de l'expresion.");
+						
+					}
+					else{
+						pileType.push(ValueType.ENTIER);
+					}
+					break;
 				case INF :
 				case SUP :
 				case INFEQ :
 				case SUPEQ :
-					if(type1 != ValueType.ENTIER) 
-					{
-						System.out.println("Erreur dans le calcul de l'expresion.");
-					}
-					break;
+				if(type1 != ValueType.ENTIER) 
+				{
+					System.out.println("Erreur dans le calcul de l'expresion.");
+					
+				}
+				else{
+					pileType.push(ValueType.BOOLEEN);
+				}
+				break;
 				case AND :
 				case OR :
 					if(type1 != ValueType.BOOLEEN) 
 					{
 						System.out.println("Erreur dans le calcul de l'expresion.");
+						pileType.push(ValueType.BOOLEEN);
 					}
 					break;
+				case EQUAL :
+				case NEQUAL :
+				pileType.push(ValueType.BOOLEEN);
+				break;
 				default:
 					System.out.println("Erreur dans le calcul de l'expression.");
 			}
@@ -45,7 +63,14 @@ public class Expression implements Constants{
 		}
 	}
 	
-	public void stack(){
-		
+	public void pushOp(Operation op)
+	{
+		pileOp.push(op);
 	}
+	
+	public void pushType(ValueType typ)
+	{
+		pileType.push(typ);
+	}
+	
 }
