@@ -18,10 +18,4 @@ public class YVM {
 		this.pile.get(-2 * offset);
 	}
 	
-	
-	
-	public static void error(String message) {
-		System.out.println(message + "\n");
-	}
-
 }
