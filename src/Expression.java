@@ -22,6 +22,7 @@ public class Expression implements Constants{
 				case DIV :
 					if(type1 != ValueType.ENTIER) 
 					{
+						pileType.push(ValueType.ERREUR);
 						System.out.println("Erreur dans le calcul de l'expresion.");
 						
 					}
@@ -35,6 +36,7 @@ public class Expression implements Constants{
 				case SUPEQ :
 				if(type1 != ValueType.ENTIER) 
 				{
+					pileType.push(ValueType.ERREUR);
 					System.out.println("Erreur dans le calcul de l'expresion.");
 					
 				}
@@ -46,8 +48,8 @@ public class Expression implements Constants{
 				case OR :
 					if(type1 != ValueType.BOOLEEN) 
 					{
+						pileType.push(ValueType.ERREUR);
 						System.out.println("Erreur dans le calcul de l'expresion.");
-						pileType.push(ValueType.BOOLEEN);
 					}
 					break;
 				case EQUAL :
@@ -55,6 +57,7 @@ public class Expression implements Constants{
 				pileType.push(ValueType.BOOLEEN);
 				break;
 				default:
+					pileType.push(ValueType.ERREUR);
 					System.out.println("Erreur dans le calcul de l'expression.");
 			}
 		}
@@ -85,6 +88,18 @@ public class Expression implements Constants{
 	public void pushType(ValueType typ)
 	{
 		pileType.push(typ);
+	}
+	
+	public void pushType(String identLu) {
+		Ident ident = Yaka.tabIdent.chercheIdent(identLu);
+		ValueType type = ident.getValueType();
+		if(type == null) {
+			pileType.push(ValueType.ERREUR);
+			System.out.println("Erreur dans le calcul de l'expresion.");
+		}
+		else {
+			pileType.push(type);
+		}
 	}
 	
 }

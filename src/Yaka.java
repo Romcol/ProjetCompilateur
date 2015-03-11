@@ -95,26 +95,27 @@ public class Yaka implements Constants, YakaConstants {
   static final public void defConst() throws ParseException {
     jj_consume_token(ident);
     jj_consume_token(42);
-    valConst(YakaTokenManager.identLu);
+    valConst();
+                   declaration.setCurrentIdent(YakaTokenManager.identLu);
   }
 
-  static final public void valConst(String theIdent) throws ParseException {
+  static final public void valConst() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case entier:
       jj_consume_token(entier);
-                 declaration.defConstEntier(theIdent, YakaTokenManager.entierLu);
+                 declaration.defConstEntier(YakaTokenManager.entierLu);
       break;
     case ident:
       jj_consume_token(ident);
-                 declaration.defConstIdent(theIdent, YakaTokenManager.identLu);
+                 declaration.defConstIdent(YakaTokenManager.identLu);
       break;
     case VRAI:
       jj_consume_token(VRAI);
-                 declaration.defConstBool(theIdent, -1);
+                 declaration.defConstBool(-1);
       break;
     case FAUX:
       jj_consume_token(FAUX);
-                 declaration.defConstBool(theIdent, 0);
+                 declaration.defConstBool(0);
       break;
     default:
       jj_la1[3] = jj_gen;
@@ -127,6 +128,7 @@ public class Yaka implements Constants, YakaConstants {
     jj_consume_token(VAR);
     type();
     jj_consume_token(ident);
+           declaration.defVar(YakaTokenManager.identLu);
     label_4:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -139,26 +141,26 @@ public class Yaka implements Constants, YakaConstants {
       }
       jj_consume_token(40);
       jj_consume_token(ident);
+                declaration.defVar(YakaTokenManager.identLu);
     }
     jj_consume_token(41);
   }
 
-  static final public ValueType type() throws ParseException {
+  static final public void type() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ENTIER:
       jj_consume_token(ENTIER);
-              {if (true) return ValueType.ENTIER;}
+              declaration.setCurrentType(ValueType.ENTIER);
       break;
     case BOOLEEN:
       jj_consume_token(BOOLEEN);
-               {if (true) return ValueType.BOOLEAN;}
+               declaration.setCurrentType(ValueType.BOOLEEN);
       break;
     default:
       jj_la1[5] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
-    throw new Error("Missing return statement in function");
   }
 
 /*
@@ -221,6 +223,7 @@ public class Yaka implements Constants, YakaConstants {
     case 49:
       opRel();
       simpleExpr();
+                expression.eval();
       break;
     default:
       jj_la1[9] = jj_gen;
@@ -244,6 +247,7 @@ public class Yaka implements Constants, YakaConstants {
       }
       opAdd();
       terme();
+                 expression.eval();
     }
   }
 
@@ -263,6 +267,7 @@ public class Yaka implements Constants, YakaConstants {
       }
       opMul();
       facteur();
+                 expression.eval();
     }
   }
 
@@ -279,6 +284,7 @@ public class Yaka implements Constants, YakaConstants {
     case 51:
       opNeg();
       primaire();
+                         expression.evalNeg();
       break;
     default:
       jj_la1[12] = jj_gen;
@@ -311,15 +317,19 @@ public class Yaka implements Constants, YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case entier:
       jj_consume_token(entier);
+                 expression.pushType(ValueType.ENTIER);
       break;
     case ident:
       jj_consume_token(ident);
+                 expression.pushType(YakaTokenManager.identLu);
       break;
     case VRAI:
       jj_consume_token(VRAI);
+                 expression.pushType(ValueType.BOOLEEN);
       break;
     case FAUX:
       jj_consume_token(FAUX);
+                 expression.pushType(ValueType.BOOLEEN);
       break;
     default:
       jj_la1[14] = jj_gen;
@@ -332,21 +342,27 @@ public class Yaka implements Constants, YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 42:
       jj_consume_token(42);
+                 expression.pushOp(Operation.EQUAL);
       break;
     case 45:
       jj_consume_token(45);
+                 expression.pushOp(Operation.NEQUAL);
       break;
     case 46:
       jj_consume_token(46);
+                 expression.pushOp(Operation.INF);
       break;
     case 47:
       jj_consume_token(47);
+                 expression.pushOp(Operation.INFEQ);
       break;
     case 48:
       jj_consume_token(48);
+                 expression.pushOp(Operation.SUP);
       break;
     case 49:
       jj_consume_token(49);
+                 expression.pushOp(Operation.SUPEQ);
       break;
     default:
       jj_la1[15] = jj_gen;
@@ -359,12 +375,15 @@ public class Yaka implements Constants, YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 50:
       jj_consume_token(50);
+                 expression.pushOp(Operation.PLUS);
       break;
     case 51:
       jj_consume_token(51);
+                 expression.pushOp(Operation.MINUS);
       break;
     case OU:
       jj_consume_token(OU);
+                 expression.pushOp(Operation.OR);
       break;
     default:
       jj_la1[16] = jj_gen;
@@ -377,12 +396,15 @@ public class Yaka implements Constants, YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 52:
       jj_consume_token(52);
+                 expression.pushOp(Operation.MUL);
       break;
     case 53:
       jj_consume_token(53);
+                 expression.pushOp(Operation.DIV);
       break;
     case ET:
       jj_consume_token(ET);
+                 expression.pushOp(Operation.AND);
       break;
     default:
       jj_la1[17] = jj_gen;
@@ -395,9 +417,11 @@ public class Yaka implements Constants, YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 51:
       jj_consume_token(51);
+                 expression.pushOp(Operation.MINUS);
       break;
     case NON:
       jj_consume_token(NON);
+                 expression.pushOp(Operation.NOT);
       break;
     default:
       jj_la1[18] = jj_gen;

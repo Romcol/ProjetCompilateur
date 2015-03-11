@@ -164,7 +164,7 @@ void defConst() : {}
     
 }
 
-void valConst(String theIdent) : {}{
+void valConst() : {}{
   <entier>	{declaration.defConstEntier(YakaTokenManager.entierLu);}
  | <ident>	{declaration.defConstIdent(YakaTokenManager.identLu);}
  | <VRAI> 	{declaration.defConstBool(-1);}
@@ -182,7 +182,7 @@ void declVar() : {}
 	
 }
 
-type() :{}
+void type() : {}
 {
    <ENTIER> { declaration.setCurrentType(ValueType.ENTIER);}
  | <BOOLEEN> { declaration.setCurrentType(ValueType.BOOLEEN);}
@@ -234,7 +234,7 @@ void primaire (): {}
 
 void valeur () : {}
 { <entier> 	{expression.pushType(ValueType.ENTIER);}	
- | <ident> 	{expression.pushType(identLu);}
+ | <ident> 	{expression.pushType(YakaTokenManager.identLu);}
  | <VRAI> 	{expression.pushType(ValueType.BOOLEEN);}	
  | <FAUX> 	{expression.pushType(ValueType.BOOLEEN);}
 }
