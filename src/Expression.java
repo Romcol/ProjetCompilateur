@@ -62,6 +62,20 @@ public class Expression implements Constants{
 			System.out.println("Erreur dans le calcul de l'expresion.");
 		}
 	}
+	public void evalNeg(){
+		Operation op = pileOp.pop();
+		ValueType type = pileType.pop();
+		if(type == ValueType.ENTIER && op == Operation.MINUS)
+		{
+			pileType.push(ValueType.ENTIER);
+		}
+		else if(type == ValueType.BOOLEEN && op == Operation.NOT){
+			pileType.push(ValueType.BOOLEEN);
+		}
+		else{
+			System.out.println("Erreur dans le calcul de l'expresion.");
+		}
+	}
 	
 	public void pushOp(Operation op)
 	{
