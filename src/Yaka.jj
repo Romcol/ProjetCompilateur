@@ -210,7 +210,7 @@ void simpleExpr() : {}
 {
    terme() 
    (opAdd() 
-   terme()	
+   terme()	{expression.eval();}
    )*
 }
 
@@ -218,12 +218,12 @@ void terme() : {}
 {
   facteur() 
   (opMul() 
-  facteur()	
+  facteur()	{expression.eval();}
   )*
 }
 void facteur() : {}
 {   primaire() 
-  |  opNeg() primaire() 
+  |  opNeg() primaire() {expression.evalNeg();}
 }
 
 void primaire (): {}
@@ -264,7 +264,7 @@ void opMul() : {}
 } 
 
 void opNeg() : {}
-{ "-" 		
+{ "-" 		{expression.pushOp(Operation.MINUS);}
  | <NON>	{expression.pushOp(Operation.NOT);}
 }
 
