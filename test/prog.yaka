@@ -1,0 +1,7 @@
+PROGRAMME prog
+CONST
+	aa=10;
+VAR ENTIER c1,c2;
+VAR BOOLEEN b1;
+	aa + aa;
+FPROGRAMME

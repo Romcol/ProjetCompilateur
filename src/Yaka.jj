@@ -18,10 +18,10 @@ PARSER_BEGIN(Yaka)
 
 
 public class Yaka implements Constants {
-	public static Declaration declaration;
-	public static TabIdent tabIdent;
-	public static Expression expression;
-	public static YVM yvm;
+	public static Declaration declaration = new Declaration();
+	public static TabIdent tabIdent = new TabIdent();
+	public static Expression expression = new Expression();
+	public static YVM yvm = new YVM();
 
   public static void main(String args[]) { 
     Yaka analyseur;
@@ -140,7 +140,7 @@ TOKEN  :
 /**************************************/
 void analyse() : {}
 {
-   <PROGRAMME> <ident>	
+   <PROGRAMME> <ident>
    bloc()
    <FPROGRAMME> 
 }
@@ -165,7 +165,7 @@ void defConst() : {}
 }
 
 void valConst() : {}{
-  <entier>	{declaration.defConstEntier(YakaTokenManager.entierLu);}
+  <entier>	{declaration.defConstEntier(YakaTokenManager.identLu);}
  | <ident>	{declaration.defConstIdent(YakaTokenManager.identLu);}
  | <VRAI> 	{declaration.defConstBool(-1);}
  | <FAUX> 	{declaration.defConstBool(0);}

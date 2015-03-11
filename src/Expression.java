@@ -42,7 +42,7 @@ public class Expression implements Constants{
 				}
 				else{
 					pileType.push(ValueType.BOOLEEN);
-				}
+		 		}
 				break;
 				case AND :
 				case OR :
