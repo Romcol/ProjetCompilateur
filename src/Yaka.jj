@@ -201,6 +201,11 @@ void instruction() : {}
 	| ecriture()
 }
 
+void affectation() : {}
+{
+	<ident> "=" expression()
+}
+
 void lecture() : {}
 {
 	<LIRE> "(" <ident> ")"
@@ -208,7 +213,7 @@ void lecture() : {}
 
 void ecriture() : {}
 {
-	<ECRIRE> "(" (expression() | chaine()) ")"
+	<ECRIRE> "(" (expression() | <chaine>) ")"
 	| <ALALIGNE>
 }
 

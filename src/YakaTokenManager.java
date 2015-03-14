@@ -928,7 +928,7 @@ static void SkipLexicalActions(Token matchedToken)
          if (image == null)
             image = new StringBuffer();
          image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-              SwitchTo(DEFAULT);
+                    SwitchTo(DEFAULT);
          break;
       default :
          break;
