@@ -8,4 +8,12 @@ public class IdVar extends Ident {
 	public boolean isConst(){
 		return false;
 	}
+	
+	public int getOffset() {
+		return offset;
+	}
+	
+	public String toString() {
+		return "@[" + offset + "]";
+	}
 }

@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class TabIdent {
 	private HashMap<String,Ident> table;
@@ -13,5 +14,16 @@ public class TabIdent {
 	}
 	public void rangeIdent(String clef, Ident id){
 		table.put(clef, id);
+	}
+	
+	public String toString() {
+		
+		String ret = "";
+		
+		for (Map.Entry<String, Ident> entry : table.entrySet())
+		{
+				ret += "(" + entry.getKey() + " : " + entry.getValue() + ")\n";
+		}
+		return ret;
 	}
 }

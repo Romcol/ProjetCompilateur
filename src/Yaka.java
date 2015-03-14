@@ -27,6 +27,7 @@ public class Yaka implements Constants, YakaConstants {
     try {
       analyseur = new Yaka(input);
       analyseur.analyse();
+      System.out.println(Yaka.tabIdent);
       System.out.println("analyse syntaxique reussie!");
     } catch (ParseException e) {
       String msg = e.getMessage();
@@ -94,16 +95,16 @@ public class Yaka implements Constants, YakaConstants {
 
   static final public void defConst() throws ParseException {
     jj_consume_token(ident);
+           declaration.setCurrentIdent(YakaTokenManager.identLu);
     jj_consume_token(42);
     valConst();
-                   declaration.setCurrentIdent(YakaTokenManager.identLu);
   }
 
   static final public void valConst() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case entier:
       jj_consume_token(entier);
-                 declaration.defConstEntier(YakaTokenManager.identLu);
+                 declaration.defConstEntier(YakaTokenManager.entierLu);
       break;
     case ident:
       jj_consume_token(ident);
@@ -223,7 +224,6 @@ public class Yaka implements Constants, YakaConstants {
     case 49:
       opRel();
       simpleExpr();
-                expression.eval();
       break;
     default:
       jj_la1[9] = jj_gen;

@@ -45,6 +45,7 @@ public class Yaka implements Constants {
     try {
       analyseur = new Yaka(input);
       analyseur.analyse();
+      System.out.println(Yaka.tabIdent);
       System.out.println("analyse syntaxique reussie!");
     } catch (ParseException e) {
       String msg = e.getMessage();
@@ -159,13 +160,13 @@ void declConst() : {}
 void defConst() : {}
 {
 	
-  <ident>  	  	
-   "=" valConst() {declaration.setCurrentIdent(YakaTokenManager.identLu);}
+  <ident> {declaration.setCurrentIdent(YakaTokenManager.identLu);}
+   "=" valConst()
     
 }
 
 void valConst() : {}{
-  <entier>	{declaration.defConstEntier(YakaTokenManager.identLu);}
+  <entier>	{declaration.defConstEntier(YakaTokenManager.entierLu);}
  | <ident>	{declaration.defConstIdent(YakaTokenManager.identLu);}
  | <VRAI> 	{declaration.defConstBool(-1);}
  | <FAUX> 	{declaration.defConstBool(0);}
@@ -202,7 +203,7 @@ void expression() : {}
 {
   simpleExpr() 
   (opRel() 
-  simpleExpr() {expression.eval();}
+  simpleExpr()
   )?
 }
 
