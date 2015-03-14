@@ -3,6 +3,7 @@ public class Yaka implements Constants, YakaConstants {
         public static Declaration declaration = new Declaration();
         public static TabIdent tabIdent = new TabIdent();
         public static Expression expression = new Expression();
+        public static Affectation affectation = new Affectation();
         public static YVM yvm = new YVM();
 
         public static void main(String args[]) {
@@ -225,8 +226,10 @@ public class Yaka implements Constants, YakaConstants {
 
   static final public void affectation() throws ParseException {
     jj_consume_token(ident);
+                  affectation.setLeftType(YakaTokenManager.identLu);
     jj_consume_token(42);
     expression();
+                           affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();
   }
 
   static final public void lecture() throws ParseException {

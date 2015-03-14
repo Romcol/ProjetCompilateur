@@ -10,13 +10,10 @@ public class Expression implements Constants{
 	
 	public void eval(){
 		
-		
 		Operation op = pileOp.pop();
 		ValueType type1 = pileType.pop();
 		ValueType type2 = pileType.pop();
 		
-		System.out.println("eval : " + type1 + " " + op + " " + type2);
-
 		if(type1 == type2)
 		{
 			switch(op){
@@ -73,8 +70,6 @@ public class Expression implements Constants{
 		Operation op = pileOp.pop();
 		ValueType type = pileType.pop();
 		
-		System.out.println("eval : " + op + " " + type);
-
 		if(type == ValueType.ENTIER && op == Operation.MINUS)
 		{
 			pileType.push(ValueType.ENTIER);
@@ -90,13 +85,11 @@ public class Expression implements Constants{
 	
 	public void pushOp(Operation op)
 	{
-		System.out.println("pushOp " + op);
 		pileOp.push(op);
 	}
 	
 	public void pushType(ValueType typ)
 	{
-		System.out.println("pushType " + typ);
 		pileType.push(typ);
 	}
 	
@@ -108,10 +101,17 @@ public class Expression implements Constants{
 		}
 		else {
 			ValueType type = ident.getValueType();
-			System.out.println("pushType " + type);
-
 			pileType.push(type);
 		}
+	}
+	
+	public ValueType getFinalType() {
+		
+		if(pileType.size() != 1) {
+			System.out.println("La pile doit contenir 1 type a la fin de l'analyse de l'expression.");
+			return null;
+		}
+		return pileType.pop();
 	}
 	
 	public String toString() {

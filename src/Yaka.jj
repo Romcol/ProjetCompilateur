@@ -21,6 +21,7 @@ public class Yaka implements Constants {
 	public static Declaration declaration = new Declaration();
 	public static TabIdent tabIdent = new TabIdent();
 	public static Expression expression = new Expression();
+	public static Affectation affectation = new Affectation();
 	public static YVM yvm = new YVM();
 
 	public static void main(String args[]) { 
@@ -203,7 +204,8 @@ void instruction() : {}
 
 void affectation() : {}
 {
-	<ident> "=" expression()
+	<ident> { affectation.setLeftType(YakaTokenManager.identLu); }
+	"=" expression() { affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();}
 }
 
 void lecture() : {}
