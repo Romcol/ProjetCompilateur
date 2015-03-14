@@ -11,7 +11,7 @@ public class Yaka implements Constants, YakaConstants {
                 java.io.InputStream input;
 
                 if (args.length==1) {
-                        System.out.print(args[args.length-1] + ": ");
+                        System.out.print(args[args.length-1] + ": \n");
                         try {
                                 input = new java.io.FileInputStream(args[args.length-1]+".yaka");
                         } catch (java.io.FileNotFoundException e) {
@@ -28,7 +28,6 @@ public class Yaka implements Constants, YakaConstants {
                 try {
                         analyseur = new Yaka(input);
                         analyseur.analyse();
-                        System.out.println(Yaka.tabIdent);
                         System.out.println("analyse syntaxique reussie!");
                 } catch (ParseException e) {
                         String msg = e.getMessage();
@@ -72,6 +71,7 @@ public class Yaka implements Constants, YakaConstants {
       }
       declVar();
     }
+                 yvm.initStack(); yvm.ecrireEntete();
     suiteInstr();
   }
 
@@ -237,6 +237,7 @@ public class Yaka implements Constants, YakaConstants {
     jj_consume_token(43);
     jj_consume_token(ident);
     jj_consume_token(44);
+                                 yvm.lireEnt(YakaTokenManager.identLu);
   }
 
   static final public void ecriture() throws ParseException {
@@ -256,6 +257,7 @@ public class Yaka implements Constants, YakaConstants {
         break;
       case chaine:
         jj_consume_token(chaine);
+                                                yvm.ecrireChaine(YakaTokenManager.chaineLue);
         break;
       default:
         jj_la1[10] = jj_gen;
@@ -266,6 +268,7 @@ public class Yaka implements Constants, YakaConstants {
       break;
     case ALALIGNE:
       jj_consume_token(ALALIGNE);
+                       yvm.aLaLigne();
       break;
     default:
       jj_la1[11] = jj_gen;

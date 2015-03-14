@@ -3,6 +3,7 @@ import java.util.Map;
 
 public class TabIdent {
 	private HashMap<String,Ident> table;
+	
 	public TabIdent() {
 		this.table = new HashMap<String, Ident>();
 	}
@@ -25,5 +26,9 @@ public class TabIdent {
 				ret += "(" + entry.getKey() + " : " + entry.getValue() + ")\n";
 		}
 		return ret;
+	}
+	
+	public HashMap<String, Ident> getTable() {
+		return table;
 	}
 }

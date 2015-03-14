@@ -29,7 +29,7 @@ public class Yaka implements Constants {
 		java.io.InputStream input;
 
 		if (args.length==1) {
-			System.out.print(args[args.length-1] + ": ");
+			System.out.print(args[args.length-1] + ": \n");
 			try {
 				input = new java.io.FileInputStream(args[args.length-1]+".yaka");
 			} catch (java.io.FileNotFoundException e) {
@@ -46,7 +46,6 @@ public class Yaka implements Constants {
 		try {
 			analyseur = new Yaka(input);
 			analyseur.analyse();
-			System.out.println(Yaka.tabIdent);
 			System.out.println("analyse syntaxique reussie!");
 		} catch (ParseException e) {
 			String msg = e.getMessage();
@@ -149,8 +148,8 @@ void analyse() : {}
 
 void bloc() : {}{
  (declConst())*
- (declVar())*		
-	 suiteInstr() 
+ (declVar())*  { yvm.initStack(); yvm.ecrireEntete();}
+  suiteInstr() 
 }
 
 void declConst() : {}
@@ -210,13 +209,13 @@ void affectation() : {}
 
 void lecture() : {}
 {
-	<LIRE> "(" <ident> ")"
+	<LIRE> "(" <ident> ")" { yvm.lireEnt(YakaTokenManager.identLu); }
 }
 
 void ecriture() : {}
 {
-	<ECRIRE> "(" (expression() | <chaine>) ")"
-	| <ALALIGNE>
+	<ECRIRE> "(" (expression() | <chaine> { yvm.ecrireChaine(YakaTokenManager.chaineLue); }) ")"
+	| <ALALIGNE> { yvm.aLaLigne(); }
 }
 
 

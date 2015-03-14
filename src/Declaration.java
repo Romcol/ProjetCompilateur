@@ -1,7 +1,6 @@
 public class Declaration implements Constants{
 	private ValueType currentType;
 	private String currentIdent;
-	private int currentOffset = -2;
 	public void defConstEntier(int entier){
 		IdConst idconst = new IdConst(currentIdent, ValueType.ENTIER, entier);
 		Yaka.tabIdent.rangeIdent(currentIdent, idconst);
@@ -34,8 +33,7 @@ public class Declaration implements Constants{
 		this.currentIdent = currentIdent;
 	}
 	public void defVar(String identName){
-		Ident newIdent = new IdVar(identName, currentType, currentOffset);
-		currentOffset -= 2;
+		Ident newIdent = new IdVar(identName, currentType);
 		Yaka.tabIdent.rangeIdent(identName, newIdent);
 	}
 }

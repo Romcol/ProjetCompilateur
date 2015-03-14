@@ -13,6 +13,6 @@ public class IdConst extends Ident {
 	}
 	
 	public String toString() {
-		return Integer.toString(this.value);
+		return name + ":" + Integer.toString(this.value);
 	}
 }
