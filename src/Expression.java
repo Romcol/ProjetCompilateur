@@ -7,12 +7,19 @@ public class Expression implements Constants{
 	
 	private Stack<ValueType> pileType= new Stack<ValueType>();
 	private Stack<Operation> pileOp= new Stack<Operation>();
+	private Stack<Ident> pileIdent = new Stack<Ident>();
+	
 	
 	public void eval(){
 		
 		Operation op = pileOp.pop();
 		ValueType type1 = pileType.pop();
 		ValueType type2 = pileType.pop();
+		
+		ValueType ident1 = pileType.pop();
+		ValueType ident2 = pileType.pop();
+		
+		Yaka.yvm.ecrireOp(ident1, ident2, op);
 		
 		if(type1 == type2)
 		{
@@ -88,9 +95,16 @@ public class Expression implements Constants{
 		pileOp.push(op);
 	}
 	
-	public void pushType(ValueType typ)
+	public void pushBool(int value)
 	{
-		pileType.push(typ);
+		pileType.push(ValueType.BOOLEEN);		
+		pileIdent.push(new IdConst("null", ValueType.BOOLEEN, value));
+	}
+
+	public void pushInt(int value)
+	{
+		pileType.push(ValueType.ENTIER);		
+		pileIdent.push(new IdConst("null", ValueType.ENTIER, value));
 	}
 	
 	public void pushType(String identLu) {

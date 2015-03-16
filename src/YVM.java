@@ -1,8 +1,11 @@
 import java.util.Map;
 import java.util.Stack;
 
+import Constants.Operation;
+import Constants.ValueType;
 
-public class YVM {
+
+public class YVM implements Constants{
 
 	protected Stack<IdVar> pile;
 	
@@ -32,6 +35,53 @@ public class YVM {
 		String out = "entete\n";
 		out += "ouvrePrinc " + pile.size() * 2 + "\n";
 		ecrire(out);
+	}
+	
+	public void ecrireOp(Ident ident1, Ident ident2, Operation op) {
+		
+		String ret = "";
+		
+		if(ident1 instanceof IdConst) {
+			ret += "iconst =" + ((IdConst)ident1).getValue();
+		}
+		else if(ident1 instanceof IdVar) {
+			ret += "iload =" + (getOffset((IdVar)ident1));
+		}
+		ret += "\n";
+		if(ident2 instanceof IdConst) {
+			ret += "iconst =" + ((IdConst)ident2).getValue();
+		}
+		else if(ident2 instanceof IdVar) {
+			ret += "iload =" + (getOffset((IdVar)ident2));
+		}
+		
+		ret += "\n";
+		
+		ret += this.getOperationString(op);
+		
+	}
+	
+	public String getOperationString(Constants.Operation op) {
+		String ret = "";
+		switch (op) {
+		case EQUAL: ret = "iequal"; break;
+		case NEQUAL: ret = "inequal"; break;
+		case INF: ret = "inf"; break;
+		case SUP: ret = "isup"; break;
+		case SUPEQ: ret = "isupeq"; break;
+		case INFEQ: ret = "iinfeq"; break;
+		case PLUS : ret = "iadd"; break;
+		case MINUS: ret = "imin"; break;
+		case MUL: ret = "imul"; break;
+		case DIV: ret = "idiv"; break;
+		case AND: ret = "iand"; break;
+		case OR: ret = "ior"; break;
+		case NOT: ret = "inot"; break;
+			
+		
+		default:
+			break;
+		}
 	}
 	
 	public void ecrireEnt() {
@@ -82,6 +132,9 @@ public class YVM {
 	protected int indexToOffset(int index) {
 		return -2 * (index + 1);
 	}
+	
+	
+	
 	
 	public String toString() {
 		

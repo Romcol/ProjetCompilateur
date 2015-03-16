@@ -6,5 +6,6 @@ VAR BOOLEEN b1;
 	a=a-c2+c1;
 	ALALIGNE;
 	LIRE(c2);
+	b1=c1<c2;
 	ECRIRE("x=");
 FPROGRAMME

@@ -149,7 +149,7 @@ void analyse() : {}
 void bloc() : {}{
  (declConst())*
  (declVar())*  { yvm.initStack(); yvm.ecrireEntete();}
-  suiteInstr() 
+  suiteInstr()
 }
 
 void declConst() : {}
@@ -257,10 +257,10 @@ void primaire (): {}
 }
 
 void valeur () : {}
-{ <entier> 	{expression.pushType(ValueType.ENTIER);}	
+{ <entier> 	{expression.pushInt(YakaTokenManager.entierLu);}	
  | <ident> 	{expression.pushType(YakaTokenManager.identLu);}
- | <VRAI> 	{expression.pushType(ValueType.BOOLEEN);}	
- | <FAUX> 	{expression.pushType(ValueType.BOOLEEN);}
+ | <VRAI> 	{expression.pushBool(-1);}	
+ | <FAUX> 	{expression.pushBool(0);}
 }
 
 void opRel() : {}

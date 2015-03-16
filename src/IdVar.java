@@ -7,6 +7,7 @@ public class IdVar extends Ident {
 		return false;
 	}
 	
+	
 	public String toString() {
 		return name;
 	}
