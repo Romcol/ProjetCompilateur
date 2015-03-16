@@ -44,9 +44,11 @@ public class Yaka implements Constants, YakaConstants {
     jj_consume_token(ident);
     bloc();
     jj_consume_token(FPROGRAMME);
+                        yvm.queue();
   }
 
   static final public void bloc() throws ParseException {
+         yvm.entete();
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -71,7 +73,7 @@ public class Yaka implements Constants, YakaConstants {
       }
       declVar();
     }
-                 yvm.initStack(); yvm.ecrireEntete();
+                 yvm.initStack(); yvm.alloc();
     suiteInstr();
   }
 
@@ -229,7 +231,7 @@ public class Yaka implements Constants, YakaConstants {
                   affectation.setLeftIdent(YakaTokenManager.identLu);
     jj_consume_token(42);
     expression();
-                           affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();
+                affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();
   }
 
   static final public void lecture() throws ParseException {
@@ -254,10 +256,11 @@ public class Yaka implements Constants, YakaConstants {
       case 43:
       case 51:
         expression();
+                                     yvm.ecrireEnt();
         break;
       case chaine:
         jj_consume_token(chaine);
-                                                yvm.ecrireChaine(YakaTokenManager.chaineLue);
+                                                                     yvm.ecrireChaine(YakaTokenManager.chaineLue);
         break;
       default:
         jj_la1[10] = jj_gen;
@@ -281,6 +284,7 @@ public class Yaka implements Constants, YakaConstants {
  * Expression .
  */
   static final public void expression() throws ParseException {
+          expression.init();
     simpleExpr();
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 42:
@@ -447,7 +451,7 @@ public class Yaka implements Constants, YakaConstants {
       break;
     case 51:
       jj_consume_token(51);
-                 expression.pushOp(Operation.MINUS);
+                 expression.pushOp(Operation.SUB);
       break;
     case OU:
       jj_consume_token(OU);
@@ -485,7 +489,7 @@ public class Yaka implements Constants, YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 51:
       jj_consume_token(51);
-                 expression.pushOp(Operation.MINUSUN);
+                 expression.pushOp(Operation.MINUS);
       break;
     case NON:
       jj_consume_token(NON);

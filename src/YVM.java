@@ -28,13 +28,12 @@ public class YVM implements Constants{
 		}
 	}
 	
-	public void ecrireEntete() {
+	public void entete() {
 		ecrire("entete");
-		ecrire("ouvrePrinc " + pile.size() * 2);
 	}
-
-	public void ecrireOp(Operation op) {
-		ecrire(this.getOperationString(op));
+	
+	public void alloc() {
+		ecrire("ouvrePrinc " + pile.size() * 2);
 	}
 	
 	public void iconst(int value){
@@ -46,26 +45,25 @@ public class YVM implements Constants{
 	public void istore(int offset){
 		ecrire("istore "+offset);
 	}
-	public String getOperationString(Constants.Operation op) {
-		String ret = "";
-		
-		switch (op) {
-		case EQUAL: ret = "iequal"; break;
-		case NEQUAL: ret = "inequal"; break;
-		case INF: ret = "iinf"; break;
-		case SUP: ret = "isup"; break;
-		case SUPEQ: ret = "isupeq"; break;
-		case INFEQ: ret = "iinfeq"; break;
-		case PLUS : ret = "iadd"; break;
-		case MINUS: ret = "imin"; break;
-		case MINUSUN: ret = "iminun"; break;
-		case MUL: ret = "imul"; break;
-		case DIV: ret = "idiv"; break;
-		case AND: ret = "iand"; break;
-		case OR: ret = "ior"; break;
-		case NOT: ret = "inot"; break;
-		}
-		return ret;
+
+	
+	public void iadd() {
+		ecrire("iadd");
+	}
+	public void imin() {
+		ecrire("imin");
+	}
+	
+	public void idiv(){
+		ecrire("idiv");
+	}
+
+	public void imul(){
+		ecrire("imul");
+	}
+	
+	public void isub() {
+		ecrire("isub");
 	}
 	
 	public void ecrireEnt() {
@@ -88,16 +86,24 @@ public class YVM implements Constants{
 		}
 		else {
 			if(ident instanceof IdVar) {
-				ecrire("lireEnt " + getOffset((IdVar)ident));
+				lireEnt(getOffset((IdVar)ident));
 			}
 			else {
-				ecrire("no sé qué faire avec lireEnt cte.");
+				System.out.println("lireEnt impossible avec une constante");
 			}
 		}
 	}
 	
+	public void lireEnt(int offset) {
+		ecrire("lireEnt " + offset);
+	}
+	
 	public void aLaLigne() {
 		ecrire("aLaLigne");
+	}
+	
+	public void queue(){
+		ecrire("queue");
 	}
 	
 	/*
@@ -117,9 +123,6 @@ public class YVM implements Constants{
 		return -2 * (index + 1);
 	}
 	
-	
-	
-	
 	public String toString() {
 		
 		return Integer.toString(pile.size());
@@ -127,6 +130,26 @@ public class YVM implements Constants{
 	}
 	
 	private void ecrire(String str) {
-		System.out.print(str + ";\n");
+		System.out.print("\n\t;" + str + "\n");
+	}
+
+
+	public void ecrireOp(Constants.Operation op) {
+		switch (op) {
+			case EQUAL: 	break;
+			case NEQUAL: 	break;
+			case INF: 		break;
+			case SUP: 		break;
+			case SUPEQ:		break;
+			case INFEQ:		break;
+			case PLUS :		iadd(); break;
+			case MINUS:		imin(); break;
+			case SUB: 		isub(); break;
+			case MUL: 		imul(); break;
+			case DIV: 		idiv(); break;
+			case AND: 		break;
+			case OR: 		break;
+			case NOT: 		break;
+		}
 	}
 }

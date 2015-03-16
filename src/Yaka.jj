@@ -22,7 +22,7 @@ public class Yaka implements Constants {
 	public static TabIdent tabIdent = new TabIdent();
 	public static Expression expression = new Expression();
 	public static Affectation affectation = new Affectation();
-	public static YVM yvm = new YVM();
+	public static YVM yvm = new YVMasm();
 
 	public static void main(String args[]) { 
 		Yaka analyseur;
@@ -143,12 +143,13 @@ void analyse() : {}
 {
 	 <PROGRAMME> <ident>
 	 bloc()
-	 <FPROGRAMME> 
+	 <FPROGRAMME> { yvm.queue(); }
 }
 
 void bloc() : {}{
+	{yvm.entete();}
  (declConst())*
- (declVar())*  { yvm.initStack(); yvm.ecrireEntete();}
+ (declVar())*  { yvm.initStack(); yvm.alloc();}
   suiteInstr()
 }
 
@@ -204,7 +205,8 @@ void instruction() : {}
 void affectation() : {}
 {
 	<ident> { affectation.setLeftIdent(YakaTokenManager.identLu); }
-	"=" expression() { affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();}
+	"=" expression() { 
+		affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();}
 }
 
 void lecture() : {}
@@ -214,7 +216,7 @@ void lecture() : {}
 
 void ecriture() : {}
 {
-	<ECRIRE> "(" (expression() | <chaine> { yvm.ecrireChaine(YakaTokenManager.chaineLue); }) ")"
+	<ECRIRE> "(" (expression() { yvm.ecrireEnt(); } | <chaine> { yvm.ecrireChaine(YakaTokenManager.chaineLue); }) ")"
 	| <ALALIGNE> { yvm.aLaLigne(); }
 }
 
@@ -224,10 +226,11 @@ void ecriture() : {}
  */
 void expression() : {}
 {
+	{ expression.init(); }
 	simpleExpr() 
 	(opRel() 
 	simpleExpr() {expression.eval();}
-	)? 
+	)?
 }
 
 void simpleExpr() : {}
@@ -276,7 +279,7 @@ void opRel() : {}
 void opAdd() : {}
 {
 		"+"		{expression.pushOp(Operation.PLUS);}
-	|  "-"	{expression.pushOp(Operation.MINUS);}
+	|  "-"	{expression.pushOp(Operation.SUB);}
 	| <OU>	{expression.pushOp(Operation.OR);}
 }
 
@@ -288,7 +291,7 @@ void opMul() : {}
 } 
 
 void opNeg() : {}
-{ "-" 		{expression.pushOp(Operation.MINUSUN);}
+{ "-" 		{expression.pushOp(Operation.MINUS);}
  | <NON>	{expression.pushOp(Operation.NOT);}
 }
 

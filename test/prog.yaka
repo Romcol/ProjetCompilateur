@@ -1,12 +1,14 @@
 PROGRAMME prog
-CONST
-	a=10, b=2;
-VAR ENTIER c1,c2,c;
-VAR BOOLEEN b1;
-	a=a-c2+c1;
-	ALALIGNE;
-	LIRE(c2);
-	b1=c1<c2;
-	ECRIRE(c1);
+VAR ENTIER x,y,z;
 	ECRIRE("x=");
+	LIRE(x);
+	ALALIGNE;
+	ECRIRE("y=");
+	LIRE(y);
+	ALALIGNE;
+	ECRIRE("x+y=");
+	ECRIRE(x+y);
+	ALALIGNE;
+	z=(x+y/2)/5;	
+	x=y+3*y-4;
 FPROGRAMME

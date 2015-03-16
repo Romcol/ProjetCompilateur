@@ -10,17 +10,21 @@ public class Expression implements Constants{
 	
 	public void eval(){
 		
+		//System.out.println(this);
+		
 		Operation op = pileOp.pop();
 		ValueType type1 = pileType.pop();
 		ValueType type2 = pileType.pop();
 		
+		//System.out.println(op + " " + type1 + " " + type2 + "\n");
+
 		Yaka.yvm.ecrireOp(op);
 		
 		if(type1 == type2)
 		{
 			switch(op){
 				case PLUS :
-				case MINUS :
+				case SUB :
 				case MUL :
 				case DIV :
 					if(type1 != ValueType.ENTIER) 
@@ -67,6 +71,9 @@ public class Expression implements Constants{
 		else{
 			System.out.println("Erreur dans le calcul de l'expresion.");
 		}
+		//System.out.println(this);
+
+		
 	}
 	public void evalNeg(){
 		Operation op = pileOp.pop();
@@ -74,7 +81,7 @@ public class Expression implements Constants{
 		
 		Yaka.yvm.ecrireOp(op);
 		
-		if(type == ValueType.ENTIER && op == Operation.MINUSUN)
+		if(type == ValueType.ENTIER && op == Operation.MINUS)
 		{
 			pileType.push(ValueType.ENTIER);
 		}
@@ -132,6 +139,10 @@ public class Expression implements Constants{
 		return pileType.pop();
 	}
 	
+	public void init() {
+		pileOp.clear();
+		pileType.clear();
+	}
 	public String toString() {
 		return pileOp.toString() + "\n" + pileType.toString();
 	}
