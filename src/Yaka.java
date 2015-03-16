@@ -4,7 +4,7 @@ public class Yaka implements Constants, YakaConstants {
         public static TabIdent tabIdent = new TabIdent();
         public static Expression expression = new Expression();
         public static Affectation affectation = new Affectation();
-        public static YVM yvm = new YVM();
+        public static YVM yvm = new YVMasm();
 
         public static void main(String args[]) {
                 Yaka analyseur;

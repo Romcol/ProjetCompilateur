@@ -29,10 +29,10 @@ public class YVM implements Constants{
 	}
 	
 	public void ecrireEntete() {
-		String out = "entete\n";
-		out += "ouvrePrinc " + pile.size() * 2;
-		ecrire(out);
+		ecrire("entete");
+		ecrire("ouvrePrinc " + pile.size() * 2);
 	}
+
 	public void ecrireOp(Operation op) {
 		ecrire(this.getOperationString(op));
 	}
@@ -69,7 +69,7 @@ public class YVM implements Constants{
 	}
 	
 	public void ecrireEnt() {
-		
+		ecrire("ecrireEnt");
 	}
 	
 	public void ecrireChaine(String chaine) {
@@ -77,7 +77,7 @@ public class YVM implements Constants{
 	}
 	
 	public void ecrireBool() {
-		
+		ecrire("ecrireBool");
 	}
 	
 	public void lireEnt(String identLu) {
@@ -127,6 +127,6 @@ public class YVM implements Constants{
 	}
 	
 	private void ecrire(String str) {
-		System.out.print(str + "\n");
+		System.out.print(str + ";\n");
 	}
 }
