@@ -52,7 +52,7 @@ public class YVM implements Constants{
 		switch (op) {
 		case EQUAL: ret = "iequal"; break;
 		case NEQUAL: ret = "inequal"; break;
-		case INF: ret = "inf"; break;
+		case INF: ret = "iinf"; break;
 		case SUP: ret = "isup"; break;
 		case SUPEQ: ret = "isupeq"; break;
 		case INFEQ: ret = "iinfeq"; break;
