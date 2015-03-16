@@ -226,7 +226,7 @@ public class Yaka implements Constants, YakaConstants {
 
   static final public void affectation() throws ParseException {
     jj_consume_token(ident);
-                  affectation.setLeftType(YakaTokenManager.identLu);
+                  affectation.setLeftIdent(YakaTokenManager.identLu);
     jj_consume_token(42);
     expression();
                            affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();
@@ -291,6 +291,7 @@ public class Yaka implements Constants, YakaConstants {
     case 49:
       opRel();
       simpleExpr();
+                      expression.eval();
       break;
     default:
       jj_la1[12] = jj_gen;
@@ -384,7 +385,7 @@ public class Yaka implements Constants, YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case entier:
       jj_consume_token(entier);
-                 expression.pushType(ValueType.ENTIER);
+                 expression.pushInt(YakaTokenManager.entierLu);
       break;
     case ident:
       jj_consume_token(ident);
@@ -392,11 +393,11 @@ public class Yaka implements Constants, YakaConstants {
       break;
     case VRAI:
       jj_consume_token(VRAI);
-                 expression.pushType(ValueType.BOOLEEN);
+                 expression.pushBool(-1);
       break;
     case FAUX:
       jj_consume_token(FAUX);
-                 expression.pushType(ValueType.BOOLEEN);
+                 expression.pushBool(0);
       break;
     default:
       jj_la1[17] = jj_gen;
@@ -484,7 +485,7 @@ public class Yaka implements Constants, YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 51:
       jj_consume_token(51);
-                 expression.pushOp(Operation.MINUS);
+                 expression.pushOp(Operation.MINUSUN);
       break;
     case NON:
       jj_consume_token(NON);

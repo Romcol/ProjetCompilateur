@@ -1,28 +1,34 @@
 
 public class Affectation implements Constants {
 
-	private ValueType leftType;
+	private Ident leftIdent;
 	
 	private ValueType rightType;
 
 	
 	public boolean eval() {
-		if(rightType != leftType) {
-			System.out.println("Erreur d'affectation (" + rightType + " = " + leftType + ")");
+		if(rightType != leftIdent.getValueType()) {
+			System.out.println("Erreur d'affectation (" + rightType + " = " + leftIdent.getValueType() + ")");
 			return false;
+		}
+		if(leftIdent instanceof IdVar)
+		{
+			Yaka.yvm.istore(Yaka.yvm.getOffset((IdVar)leftIdent));
+		}
+		else{
+			System.out.println("Impossible de modifier une constante.");
 		}
 		return true;
 	}
 	
-	public void setLeftType(String identLu) {
+	public void setLeftIdent(String identLu) {
 		
 		Ident ident = Yaka.tabIdent.chercheIdent(identLu);
 		if(ident == null) {
 			System.out.println("Erreur d'affectation (ident "+ identLu +" non trouvé.)");
 		}
 		else {
-			ValueType type = ident.getValueType();
-			this.leftType = type;
+			this.leftIdent = ident;
 		}
 	}
 

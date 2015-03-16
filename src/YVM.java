@@ -1,9 +1,6 @@
 import java.util.Map;
 import java.util.Stack;
 
-import Constants.Operation;
-import Constants.ValueType;
-
 
 public class YVM implements Constants{
 
@@ -33,36 +30,25 @@ public class YVM implements Constants{
 	
 	public void ecrireEntete() {
 		String out = "entete\n";
-		out += "ouvrePrinc " + pile.size() * 2 + "\n";
+		out += "ouvrePrinc " + pile.size() * 2;
 		ecrire(out);
 	}
-	
-	public void ecrireOp(Ident ident1, Ident ident2, Operation op) {
-		
-		String ret = "";
-		
-		if(ident1 instanceof IdConst) {
-			ret += "iconst =" + ((IdConst)ident1).getValue();
-		}
-		else if(ident1 instanceof IdVar) {
-			ret += "iload =" + (getOffset((IdVar)ident1));
-		}
-		ret += "\n";
-		if(ident2 instanceof IdConst) {
-			ret += "iconst =" + ((IdConst)ident2).getValue();
-		}
-		else if(ident2 instanceof IdVar) {
-			ret += "iload =" + (getOffset((IdVar)ident2));
-		}
-		
-		ret += "\n";
-		
-		ret += this.getOperationString(op);
-		
+	public void ecrireOp(Operation op) {
+		ecrire(this.getOperationString(op));
 	}
 	
+	public void iconst(int value){
+		ecrire("iconst "+value);
+	}
+	public void iload(int offset){
+		ecrire("iload "+offset);
+	}
+	public void istore(int offset){
+		ecrire("istore "+offset);
+	}
 	public String getOperationString(Constants.Operation op) {
 		String ret = "";
+		
 		switch (op) {
 		case EQUAL: ret = "iequal"; break;
 		case NEQUAL: ret = "inequal"; break;
@@ -72,16 +58,14 @@ public class YVM implements Constants{
 		case INFEQ: ret = "iinfeq"; break;
 		case PLUS : ret = "iadd"; break;
 		case MINUS: ret = "imin"; break;
+		case MINUSUN: ret = "iminun"; break;
 		case MUL: ret = "imul"; break;
 		case DIV: ret = "idiv"; break;
 		case AND: ret = "iand"; break;
 		case OR: ret = "ior"; break;
 		case NOT: ret = "inot"; break;
-			
-		
-		default:
-			break;
 		}
+		return ret;
 	}
 	
 	public void ecrireEnt() {
@@ -89,7 +73,7 @@ public class YVM implements Constants{
 	}
 	
 	public void ecrireChaine(String chaine) {
-		ecrire("ecrireChaine " + chaine + "\n");
+		ecrire("ecrireChaine " + chaine);
 	}
 	
 	public void ecrireBool() {
@@ -104,22 +88,22 @@ public class YVM implements Constants{
 		}
 		else {
 			if(ident instanceof IdVar) {
-				ecrire("lireEnt " + getOffset((IdVar)ident) + "\n");
+				ecrire("lireEnt " + getOffset((IdVar)ident));
 			}
 			else {
-				ecrire("no sé qué faire avec lireEnt cte.\n");
+				ecrire("no sé qué faire avec lireEnt cte.");
 			}
 		}
 	}
 	
 	public void aLaLigne() {
-		ecrire("aLaLigne\n");
+		ecrire("aLaLigne");
 	}
 	
 	/*
 	 * @return offset d'une variable
 	 */
-	protected int getOffset(IdVar var) {
+	public int getOffset(IdVar var) {
 		return(indexToOffset(pile.indexOf(var)));
 	}
 	
@@ -143,6 +127,6 @@ public class YVM implements Constants{
 	}
 	
 	private void ecrire(String str) {
-		System.out.print(str);
+		System.out.print(str + "\n");
 	}
 }

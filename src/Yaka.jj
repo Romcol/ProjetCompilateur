@@ -203,7 +203,7 @@ void instruction() : {}
 
 void affectation() : {}
 {
-	<ident> { affectation.setLeftType(YakaTokenManager.identLu); }
+	<ident> { affectation.setLeftIdent(YakaTokenManager.identLu); }
 	"=" expression() { affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();}
 }
 
@@ -226,8 +226,8 @@ void expression() : {}
 {
 	simpleExpr() 
 	(opRel() 
-	simpleExpr()
-	)? {expression.eval();}
+	simpleExpr() {expression.eval();}
+	)? 
 }
 
 void simpleExpr() : {}
@@ -288,7 +288,7 @@ void opMul() : {}
 } 
 
 void opNeg() : {}
-{ "-" 		{expression.pushOp(Operation.MINUS);}
+{ "-" 		{expression.pushOp(Operation.MINUSUN);}
  | <NON>	{expression.pushOp(Operation.NOT);}
 }
 
