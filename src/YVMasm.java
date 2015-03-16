@@ -2,7 +2,6 @@
 public class YVMasm extends YVM{
 
 	public void iadd() {
-		super();
 		ecrire("pop bx");
 		ecrire("pop ax");
 		ecrire("add ax,bx");
