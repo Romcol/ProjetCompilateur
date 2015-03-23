@@ -7,8 +7,16 @@ public class IdVar extends Ident {
 		return false;
 	}
 	
+	public void load() {
+		Yaka.yvm.iload(this.value);
+	}
+	
+	public void store() {
+		Yaka.yvm.istore(this.value);
+	}
 	
 	public String toString() {
 		return name;
 	}
+
 }

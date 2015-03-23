@@ -120,13 +120,7 @@ public class Expression implements Constants{
 		else {
 			ValueType type = ident.getValueType();
 			pileType.push(type);
-			if(ident instanceof IdVar)
-			{
-				Yaka.yvm.iload(Yaka.yvm.getOffset((IdVar)ident));
-			}
-			else{
-				Yaka.yvm.iconst(((IdConst)ident).getValue());
-			}
+			ident.load();
 		}
 	}
 	

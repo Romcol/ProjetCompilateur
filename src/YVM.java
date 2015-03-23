@@ -1,31 +1,15 @@
-import java.util.Map;
-import java.util.Stack;
+import java.io.OutputStream;
 
 
 public class YVM implements Constants{
-
-	protected Stack<IdVar> pile;
 	
+	protected OutputStream out;
 	
 	public YVM() {
-		this.pile = new Stack<IdVar>();
+		this.out = Ecriture.ouvrir("prog.asm");
 	}
 
 	public void addVar(IdVar var) {
-		this.pile.push(var);
-	}
-
-
-	/*
-	 * Initialise la pile avec les valeurs tabIdent. Executée après la déclaration des variables.
-	 */
-	public void initStack() {
-		for (Map.Entry<String, Ident> entry : Yaka.tabIdent.getTable().entrySet())
-		{				
-			if(entry.getValue() instanceof IdVar){
-				pile.push((IdVar) entry.getValue());
-			}
-		}
 	}
 	
 	public void entete() {
@@ -33,7 +17,7 @@ public class YVM implements Constants{
 	}
 	
 	public void alloc() {
-		ecrire("ouvrePrinc " + pile.size() * 2);
+		ecrire("ouvrePrinc " + Yaka.tabIdent.getNbVar() * 2);
 	}
 	
 	public void iconst(int value){
@@ -86,7 +70,7 @@ public class YVM implements Constants{
 		}
 		else {
 			if(ident instanceof IdVar) {
-				lireEnt(getOffset((IdVar)ident));
+				lireEnt(ident.getValue());
 			}
 			else {
 				System.out.println("lireEnt impossible avec une constante");
@@ -107,13 +91,6 @@ public class YVM implements Constants{
 	}
 	
 	/*
-	 * @return offset d'une variable
-	 */
-	public int getOffset(IdVar var) {
-		return(indexToOffset(pile.indexOf(var)));
-	}
-	
-	/*
 	 * calcule un offset à partir d'un index. Ex :
 	 * 0 -> -2
 	 * 1 -> -4
@@ -122,15 +99,11 @@ public class YVM implements Constants{
 	protected int indexToOffset(int index) {
 		return -2 * (index + 1);
 	}
-	
-	public String toString() {
-		
-		return Integer.toString(pile.size());
 
-	}
 	
 	private void ecrire(String str) {
-		System.out.print("\n\t;" + str + "\n");
+
+		Ecriture.ecrireString(out,"\n\t;" + str + "\n");
 	}
 
 

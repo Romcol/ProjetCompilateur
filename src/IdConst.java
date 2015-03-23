@@ -1,6 +1,5 @@
 
 public class IdConst extends Ident {
-	private int value;
 	public IdConst(String name, ValueType valueType, int value){
 		super(name, valueType);
 		this.value = value;
@@ -8,11 +7,15 @@ public class IdConst extends Ident {
 	public boolean isConst(){
 		return true;
 	}
-	public int getValue() {
-		return value;
-	}
-	
 	public String toString() {
 		return name + ":" + Integer.toString(this.value);
+	}
+
+	public void load() {
+		Yaka.yvm.iconst(this.value);
+	}
+
+	public void store() {
+		Yaka.yvm.ecrireChaine("Impossible de modifier une constante.");
 	}
 }

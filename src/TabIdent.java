@@ -2,9 +2,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TabIdent {
+	
+	private int nbVar;
+	
+
 	private HashMap<String,Ident> table;
 	
 	public TabIdent() {
+		this.nbVar = 0;
 		this.table = new HashMap<String, Ident>();
 	}
 	public Ident chercheIdent(String clef){
@@ -13,7 +18,14 @@ public class TabIdent {
 	public boolean existeIdent(String clef){
 		return table.containsKey(clef);
 	}
-	public void rangeIdent(String clef, Ident id){
+	
+	public void rangeIdent(String clef, IdConst id){
+		table.put(clef, id);
+	}
+	
+	public void rangeIdent(String clef, IdVar id){
+		this.nbVar++;
+		id.setValue((nbVar+1)*(-2));
 		table.put(clef, id);
 	}
 	
@@ -31,4 +43,9 @@ public class TabIdent {
 	public HashMap<String, Ident> getTable() {
 		return table;
 	}
+
+	public int getNbVar() {
+		return nbVar;
+	}
+
 }
