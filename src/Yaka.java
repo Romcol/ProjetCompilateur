@@ -231,7 +231,7 @@ public class Yaka implements Constants, YakaConstants {
                   affectation.setLeftIdent(YakaTokenManager.identLu);
     jj_consume_token(42);
     expression();
-                affectation.setRightType(Yaka.expression.getFinalType());
+                affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();
   }
 
   static final public void lecture() throws ParseException {

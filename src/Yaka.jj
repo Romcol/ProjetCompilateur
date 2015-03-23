@@ -206,7 +206,7 @@ void affectation() : {}
 {
 	<ident> { affectation.setLeftIdent(YakaTokenManager.identLu); }
 	"=" expression() { 
-		affectation.setRightType(Yaka.expression.getFinalType());}
+		affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();}
 }
 
 void lecture() : {}
