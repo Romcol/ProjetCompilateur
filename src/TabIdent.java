@@ -24,9 +24,10 @@ public class TabIdent {
 	}
 	
 	public void rangeIdent(String clef, IdVar id){
-		this.nbVar++;
 		id.setValue((nbVar+1)*(-2));
 		table.put(clef, id);
+		this.nbVar++;
+
 	}
 	
 	public String toString() {

@@ -13,7 +13,7 @@ public class Yaka implements Constants, YakaConstants {
                 if (args.length==1) {
                         System.out.print(args[args.length-1] + ": \n");
                         try {
-                                input = new java.io.FileInputStream(args[args.length-1]+".yaka");
+                                input = new java.io.FileInputStream(args[args.length-1]);
                         } catch (java.io.FileNotFoundException e) {
                                 System.out.println("Fichier introuvable.");
                                 return;
@@ -73,7 +73,7 @@ public class Yaka implements Constants, YakaConstants {
       }
       declVar();
     }
-                 yvm.initStack(); yvm.alloc();
+                 yvm.alloc();
     suiteInstr();
   }
 
@@ -231,7 +231,7 @@ public class Yaka implements Constants, YakaConstants {
                   affectation.setLeftIdent(YakaTokenManager.identLu);
     jj_consume_token(42);
     expression();
-                affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();
+                affectation.setRightType(Yaka.expression.getFinalType());
   }
 
   static final public void lecture() throws ParseException {
@@ -295,7 +295,6 @@ public class Yaka implements Constants, YakaConstants {
     case 49:
       opRel();
       simpleExpr();
-                      expression.eval();
       break;
     default:
       jj_la1[12] = jj_gen;
@@ -319,7 +318,6 @@ public class Yaka implements Constants, YakaConstants {
       }
       opAdd();
       terme();
-                         expression.eval();
     }
   }
 

@@ -13,12 +13,10 @@ abstract public class Ident implements Constants{
 		this.valueType = valueType;
 		this.name = name;
 	}
-	public abstract boolean isConst();
 	
 	public abstract void load();
 	
 	public abstract void store();
-	
 	
 	public void setValue(int value) {
 		this.value = value;

@@ -6,7 +6,7 @@ public class YVM implements Constants{
 	protected OutputStream out;
 	
 	public YVM() {
-		this.out = Ecriture.ouvrir("prog.asm");
+		this.out = Ecriture.ouvrir("test/out.asm");
 	}
 
 	public void addVar(IdVar var) {
@@ -66,14 +66,14 @@ public class YVM implements Constants{
 		
 		Ident ident = Yaka.tabIdent.chercheIdent(identLu);
 		if(ident == null) {
-			System.out.println("Erreur instruction lireEnt (ident "+ identLu +" non trouvé.)");
+			ecrireErreur("Erreur instruction lireEnt (ident "+ identLu +" non trouvé.)");
 		}
 		else {
 			if(ident instanceof IdVar) {
 				lireEnt(ident.getValue());
 			}
 			else {
-				System.out.println("lireEnt impossible avec une constante");
+				ecrireErreur("lireEnt impossible avec une constante");
 			}
 		}
 	}
@@ -124,5 +124,13 @@ public class YVM implements Constants{
 			case OR: 		break;
 			case NOT: 		break;
 		}
+	}
+	
+	
+	public void ecrireErreur(String message) {
+		System.out.println(message + 
+				" (in \"" + Yaka.token.image + "\"," +
+				"line:" + Yaka.token.beginLine
+				+ ", column:" + Yaka.token.beginColumn + "-" + Yaka.token.endColumn + ")");
 	}
 }

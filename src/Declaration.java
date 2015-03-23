@@ -14,7 +14,7 @@ public class Declaration implements Constants{
 			Yaka.tabIdent.rangeIdent(currentIdent, idconst);
 		}
 		else{
-			System.out.println("Ident "+ident1+" not found.");
+			Yaka.yvm.ecrireErreur("Ident "+ident1+" not found.");
 		}
 	}
 	public void defConstBool(int value){
