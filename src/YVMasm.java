@@ -77,6 +77,98 @@ public class YVMasm extends YVM{
 		ecrire("sub ax,bx");
 		ecrire("push ax");
 	}
+	
+	public void isup(){
+		super.isup();
+		ecrire("pop bx");
+		ecrire("pop ax");
+		ecrire("cmp ax,bx");
+		ecrire("jle $+6");
+		ecrire("push -1");
+		ecrire("jmp $+4");
+		ecrire("push 0");
+	}
+	public void isupegal(){
+		super.isupegal();
+		ecrire("pop bx");
+		ecrire("pop ax");
+		ecrire("cmp ax,bx");
+		ecrire("jl $+6");
+		ecrire("push -1");
+		ecrire("jmp $+4");
+		ecrire("push 0");
+	}
+	public void iinf(){
+		super.iinf();
+		ecrire("pop bx");
+		ecrire("pop ax");
+		ecrire("cmp ax,bx");
+		ecrire("jge $+6");
+		ecrire("push -1");
+		ecrire("jmp $+4");
+		ecrire("push 0");
+	}
+	public void iinfegal(){
+		super.iinfegal();
+		ecrire("pop bx");
+		ecrire("pop ax");
+		ecrire("cmp ax,bx");
+		ecrire("jg $+6");
+		ecrire("push -1");
+		ecrire("jmp $+4");
+		ecrire("push 0");
+	}
+	public void iegal(){
+		super.iegal();
+		ecrire("pop bx");
+		ecrire("pop ax");
+		ecrire("cmp ax,bx");
+		ecrire("jne $+6");
+		ecrire("push -1");
+		ecrire("jmp $+4");
+		ecrire("push 0");
+	}
+	public void inegal(){
+		super.inegal();
+		ecrire("pop bx");
+		ecrire("pop ax");
+		ecrire("cmp ax,bx");
+		ecrire("je $+6");
+		ecrire("push -1");
+		ecrire("jmp $+4");
+		ecrire("push 0");
+	}
+	public void iand(){
+		super.iand();
+		ecrire("pop bx");
+		ecrire("pop ax");
+		ecrire("mul ax,bx");
+		ecrire("cmp ax,1");
+		ecrire("jne $+6");
+		ecrire("push -1");
+		ecrire("jmp $+4");
+		ecrire("push 0");
+	}
+	public void ior(){
+		super.ior();
+		ecrire("pop bx");
+		ecrire("pop ax");
+		ecrire("iadd ax,bx");
+		ecrire("cmp ax,0");
+		ecrire("jg $+6");
+		ecrire("push -1");
+		ecrire("jmp $+4");
+		ecrire("push 0");
+	}
+	public void inot(){
+		super.inot();
+		ecrire("pop ax");
+		ecrire("cmp ax,0");
+		ecrire("jne $+6");
+		ecrire("push -1");
+		ecrire("jmp $+4");
+		ecrire("push 0");
+	}
 	public void ecrireEnt() {
 		super.ecrireEnt();
 		ecrire("call ecrent");

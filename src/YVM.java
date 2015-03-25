@@ -29,7 +29,6 @@ public class YVM implements Constants{
 	public void istore(int offset){
 		ecrire("istore "+offset);
 	}
-
 	
 	public void iadd() {
 		ecrire("iadd");
@@ -41,19 +40,42 @@ public class YVM implements Constants{
 	public void idiv(){
 		ecrire("idiv");
 	}
-
 	public void imul(){
 		ecrire("imul");
 	}
-	
 	public void isub() {
 		ecrire("isub");
 	}
-	
+	public void isup(){
+		ecrire("isup");
+	}
+	public void isupegal(){
+		ecrire("isupegal");
+	}
+	public void iinf(){
+		ecrire("iinf");
+	}
+	public void iinfegal(){
+		ecrire("iinfegal");
+	}
+	public void iegal(){
+		ecrire("iegal");
+	}
+	public void inegal(){
+		ecrire("inegal");
+	}
+	public void iand(){
+		ecrire("iand");
+	}
+	public void ior(){
+		ecrire("ior");
+	}
+	public void inot(){
+		ecrire("inot");
+	}
 	public void ecrireEnt() {
 		ecrire("ecrireEnt");
 	}
-	
 	public void ecrireChaine(String chaine) {
 		ecrire("ecrireChaine " + chaine);
 	}
@@ -61,7 +83,6 @@ public class YVM implements Constants{
 	public void ecrireBool() {
 		ecrire("ecrireBool");
 	}
-	
 	public void lireEnt(String identLu) {
 		
 		Ident ident = Yaka.tabIdent.chercheIdent(identLu);
