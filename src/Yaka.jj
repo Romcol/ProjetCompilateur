@@ -229,7 +229,7 @@ void expression() : {}
 	{ expression.init(); }
 	simpleExpr() 
 	(opRel() 
-	simpleExpr()
+	simpleExpr() { expression.eval(); }
 	)?
 }
 
@@ -237,7 +237,7 @@ void simpleExpr() : {}
 {
 	 terme() 
 	 (opAdd() 
-	 terme()
+	 terme() { expression.eval();}
 	 )*
 }
 

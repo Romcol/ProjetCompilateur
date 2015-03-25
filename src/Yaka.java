@@ -295,6 +295,7 @@ public class Yaka implements Constants, YakaConstants {
     case 49:
       opRel();
       simpleExpr();
+                       expression.eval();
       break;
     default:
       jj_la1[12] = jj_gen;
@@ -318,6 +319,7 @@ public class Yaka implements Constants, YakaConstants {
       }
       opAdd();
       terme();
+                   expression.eval();
     }
   }
 

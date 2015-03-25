@@ -11,3 +11,5 @@ VAR ENTIER c1,c2;
         ECRIRE("factorielle 5= ");
 	ECRIRE(5*4*3*2*1);
 FPROGRAMME
+
+;testOK

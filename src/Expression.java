@@ -9,6 +9,11 @@ public class Expression implements Constants{
 	private Stack<Operation> pileOp= new Stack<Operation>();
 	
 	public void eval(){
+		
+		
+		if(pileType.isEmpty() || pileOp.isEmpty())
+			return;
+		
 		System.out.println("-------");
 		System.out.print(this);
 		System.out.println(Yaka.token.image);
@@ -135,9 +140,9 @@ public class Expression implements Constants{
 	}
 	
 	public void init() {
-		System.out.println("clear expr");
-		pileOp.clear();
-		pileType.clear();
+		System.out.println("clear expr" + pileOp.size());
+		//pileOp.clear();
+		//pileType.clear();
 	}
 	public String toString() {
 		return pileOp.toString() + "\n" + pileType.toString();
