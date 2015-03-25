@@ -109,12 +109,12 @@ public class YVM implements Constants{
 
 	public void ecrireOp(Constants.Operation op) {
 		switch (op) {
-			case EQUAL: 	iequal();	break;
-			case NEQUAL: 	inequal();	break;
+			case EQUAL: 	iegal();	break;
+			case NEQUAL: 	inegal();	break;
 			case INF: 		iinf(); 	break;
 			case SUP: 		isup(); 	break;
-			case SUPEQ:		isupeq(); 	break;
-			case INFEQ:		iinfeq(); 	break;
+			case SUPEQ:		isupegal();break;
+			case INFEQ:		iinfegal();break;
 			case PLUS :		iadd(); 	break;
 			case MINUS:		imin(); 	break;
 			case SUB: 		isub(); 	break;
