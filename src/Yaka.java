@@ -5,6 +5,7 @@ public class Yaka implements Constants, YakaConstants {
         public static Expression expression = new Expression();
         public static Affectation affectation = new Affectation();
         public static YVM yvm = new YVMasm();
+        public static Iteration iteration = new Iteration();
 
         public static void main(String args[]) {
                 Yaka analyseur;
@@ -172,6 +173,7 @@ public class Yaka implements Constants, YakaConstants {
  */
   static final public void suiteInstr() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case TANTQUE:
     case ECRIRE:
     case LIRE:
     case ALALIGNE:
@@ -189,6 +191,7 @@ public class Yaka implements Constants, YakaConstants {
         }
         jj_consume_token(41);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case TANTQUE:
         case ECRIRE:
         case LIRE:
         case ALALIGNE:
@@ -219,11 +222,25 @@ public class Yaka implements Constants, YakaConstants {
     case ALALIGNE:
       ecriture();
       break;
+    case TANTQUE:
+      iteration();
+      break;
     default:
       jj_la1[9] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
+  }
+
+  static final public void iteration() throws ParseException {
+    jj_consume_token(TANTQUE);
+                   iteration.push();
+    expression();
+                      iteration.checkExprType(expression.getFinalType());
+    jj_consume_token(FAIRE);
+    suiteInstr();
+    jj_consume_token(FAIT);
+                iteration.close();
   }
 
   static final public void affectation() throws ParseException {
@@ -516,7 +533,7 @@ public class Yaka implements Constants, YakaConstants {
       jj_la1_1();
    }
    private static void jj_la1_0() {
-      jj_la1_0 = new int[] {0x80000,0x200,0x0,0x120000,0x0,0x8100,0x0,0x0,0x0,0x0,0x1120000,0x0,0x0,0x400000,0x800000,0x1120000,0x120000,0x120000,0x0,0x400000,0x800000,0x1000000,};
+      jj_la1_0 = new int[] {0x80000,0x200,0x0,0x120000,0x0,0x8100,0x0,0x40000,0x40000,0x40000,0x1120000,0x0,0x0,0x400000,0x800000,0x1120000,0x120000,0x120000,0x0,0x400000,0x800000,0x1000000,};
    }
    private static void jj_la1_1() {
       jj_la1_1 = new int[] {0x0,0x0,0x100,0x50,0x100,0x0,0x200,0x47,0x47,0x47,0x808d0,0x5,0x3e400,0xc0000,0x300000,0x80850,0x850,0x50,0x3e400,0xc0000,0x300000,0x80000,};

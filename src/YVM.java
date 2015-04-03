@@ -83,6 +83,7 @@ public class YVM implements Constants{
 	public void ecrireBool() {
 		ecrire("ecrireBool");
 	}
+	
 	public void lireEnt(String identLu) {
 		
 		Ident ident = Yaka.tabIdent.chercheIdent(identLu);
@@ -111,6 +112,34 @@ public class YVM implements Constants{
 		ecrire("queue");
 	}
 	
+
+	public void ecrireValue(ValueType finalType) {
+		if(finalType == ValueType.ENTIER)
+			ecrireEnt();
+		else if(finalType == ValueType.BOOLEEN)
+			ecrireBool();
+	}
+
+	
+	// ITERATION
+	
+	public void beginIt(int itIdent) {
+		ecrireDeb("FAIRE" + itIdent + ":");
+		System.out.println("truc");
+	}
+	
+	public void iffaux(int itIdent) {
+		ecrire("iffaux FAIT" + itIdent + ":");
+	}
+
+	public void igoto(int id) {
+		ecrire("goto FAIRE" + id);		
+	}
+
+	public void closeIt(int id) {
+		ecrireDeb("FAIT" + id);
+	}
+	
 	/*
 	 * calcule un offset à partir d'un index. Ex :
 	 * 0 -> -2
@@ -123,8 +152,11 @@ public class YVM implements Constants{
 
 	
 	private void ecrire(String str) {
-
 		Ecriture.ecrireString(out,"\n\t;" + str + "\n");
+	}
+
+	private void ecrireDeb(String str) {
+		Ecriture.ecrireString(out,"\n" + str + "\n");
 	}
 
 
@@ -155,11 +187,6 @@ public class YVM implements Constants{
 				+ ", column:" + Yaka.token.beginColumn + "-" + Yaka.token.endColumn + ")");
 	}
 
-	public void ecrireValue(ValueType finalType) {
-		if(finalType == ValueType.ENTIER)
-			ecrireEnt();
-		else if(finalType == ValueType.BOOLEEN)
-			ecrireBool();
-	}
+
 
 }

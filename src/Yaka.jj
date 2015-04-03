@@ -115,10 +115,6 @@ TOKEN :
 | <ECRIRE : "ECRIRE">
 | <LIRE : "LIRE">
 | <ALALIGNE : "ALALIGNE">
-| <TANTQUE : "TANTQUE">
-| <FAIRE : "FAIRE">
-| <FAIT : "FAIT">
-
 }
 
 
@@ -209,7 +205,11 @@ void instruction() : {}
 
 void iteration() : {}
 {
-	<TANTQUE> {iteration.push();} expression() {iteration.checkExprType(expression.getFinalType());} <FAIRE> suiteInstr() <FAIT> {iteration.close();}
+	<TANTQUE> {iteration.push();}
+	expression() {iteration.checkExprType(expression.getFinalType());}
+	<FAIRE>
+		suiteInstr() 
+	<FAIT> {iteration.close();}
 }
 void affectation() : {}
 {

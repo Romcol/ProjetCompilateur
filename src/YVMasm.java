@@ -209,6 +209,29 @@ public class YVMasm extends YVM{
 		ecrire("End debut");
 	}
 	
+	// ITERATION
+	
+	public void beginIt(int itIdent) {
+		super.beginIt(itIdent);
+		//ecrireDeb("FAIRE" + itIdent + ":");
+	}
+
+	public void iffaux(int itIdent) {
+		super.iffaux(itIdent);
+		ecrire("pop ax");
+		ecrire("cmp ax, 0");
+		ecrire("je FAIT" + itIdent);
+	}
+	
+	public void igoto(int id) {
+		super.igoto(id);
+		ecrire("jmp FAIRE" + id);		
+	}
+	
+	public void closeIt(int id) {
+		super.closeIt(id);
+	}
+	
 	private void ecrire(String str) {
 		Ecriture.ecrireString(out,"\t" + str + "\n");
 	}

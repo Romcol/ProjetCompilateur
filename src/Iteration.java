@@ -17,12 +17,13 @@ public class Iteration implements Constants{
 	public void close (){
 		try{
 			int id = pileIt.pop();
+			Yaka.yvm.igoto(id);
 			Yaka.yvm.closeIt(id);
 		}
 		catch(EmptyStackException e) {
 			Yaka.yvm.ecrireErreur("Unexpected end of iteration");
 		}
-
+	
 	}
 	
 	public void checkExprType (ValueType type)
@@ -30,5 +31,7 @@ public class Iteration implements Constants{
 		if (type != ValueType.BOOLEEN){
 			Yaka.yvm.ecrireErreur("Expected boolean expression in TANTQUE");
 		}
+		
+		Yaka.yvm.iffaux(pileIt.lastElement());
 	}
 }
