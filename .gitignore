@@ -1,1 +1,4 @@
 /bin/
+test/*.[aA][sS][mM]
+/test/*.obj
+/test/*.exe

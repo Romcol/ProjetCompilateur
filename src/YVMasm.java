@@ -153,7 +153,7 @@ public class YVMasm extends YVM{
 		super.ior();
 		ecrire("pop bx");
 		ecrire("pop ax");
-		ecrire("iadd ax,bx");
+		ecrire("add ax,bx");
 		ecrire("cmp ax,0");
 		ecrire("jg $+6");
 		ecrire("push -1");
@@ -186,6 +186,8 @@ public class YVMasm extends YVM{
 	
 	public void ecrireBool() {
 		super.ecrireBool();
+		ecrire("call ecrbool");
+
 	}
 	
 	public void lireEnt(int offset){

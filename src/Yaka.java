@@ -256,11 +256,11 @@ public class Yaka implements Constants, YakaConstants {
       case 43:
       case 51:
         expression();
-                                     yvm.ecrireEnt();
+                                     yvm.ecrireValue(expression.getFinalType());
         break;
       case chaine:
         jj_consume_token(chaine);
-                                                                     yvm.ecrireChaine(YakaTokenManager.chaineLue);
+                                                                                                yvm.ecrireChaine(YakaTokenManager.chaineLue);
         break;
       default:
         jj_la1[10] = jj_gen;

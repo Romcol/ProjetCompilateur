@@ -14,9 +14,9 @@ public class Expression implements Constants{
 		if(pileType.isEmpty() || pileOp.isEmpty())
 			return;
 		
-		System.out.println("-------");
-		System.out.print(this);
-		System.out.println(Yaka.token.image);
+		//System.out.println("-------");
+		//System.out.print(this);
+		//System.out.println(Yaka.token.image);
 		
 		Operation op = pileOp.pop();
 		ValueType type1 = pileType.pop();
@@ -62,6 +62,10 @@ public class Expression implements Constants{
 						pileType.push(ValueType.ERREUR);
 						Yaka.yvm.ecrireErreur("Erreur dans le calcul de l'expresion.");
 					}
+					else
+					{
+						pileType.push(ValueType.BOOLEEN);
+					}
 					break;
 				case EQUAL :
 				case NEQUAL :
@@ -77,9 +81,9 @@ public class Expression implements Constants{
 			Yaka.yvm.ecrireErreur("Erreur dans le calcul de l'expresion.");
 		}
 
-		System.out.print(this);
-		System.out.println(Yaka.token.image);
-		System.out.println("-------");
+		//System.out.print(this);
+		//System.out.println(Yaka.token.image);
+		//System.out.println("-------");
 	}
 	public void evalNeg(){
 		Operation op = pileOp.pop();
@@ -140,9 +144,7 @@ public class Expression implements Constants{
 	}
 	
 	public void init() {
-		System.out.println("clear expr" + pileOp.size());
-		//pileOp.clear();
-		//pileType.clear();
+
 	}
 	public String toString() {
 		return pileOp.toString() + "\n" + pileType.toString();

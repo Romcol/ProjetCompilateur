@@ -216,7 +216,7 @@ void lecture() : {}
 
 void ecriture() : {}
 {
-	<ECRIRE> "(" (expression() { yvm.ecrireEnt(); } | <chaine> { yvm.ecrireChaine(YakaTokenManager.chaineLue); }) ")"
+	<ECRIRE> "(" (expression() { yvm.ecrireValue(expression.getFinalType()); } | <chaine> { yvm.ecrireChaine(YakaTokenManager.chaineLue); }) ")"
 	| <ALALIGNE> { yvm.aLaLigne(); }
 }
 

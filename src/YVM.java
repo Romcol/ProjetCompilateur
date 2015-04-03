@@ -154,4 +154,12 @@ public class YVM implements Constants{
 				"line:" + Yaka.token.beginLine
 				+ ", column:" + Yaka.token.beginColumn + "-" + Yaka.token.endColumn + ")");
 	}
+
+	public void ecrireValue(ValueType finalType) {
+		if(finalType == ValueType.ENTIER)
+			ecrireEnt();
+		else if(finalType == ValueType.BOOLEEN)
+			ecrireBool();
+	}
+
 }
