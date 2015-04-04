@@ -137,7 +137,7 @@ public class YVM implements Constants{
 	}
 
 	public void closeIt(int id) {
-		ecrireDeb("FAIT" + id);
+		ecrireDeb("FAIT" + id + ":");
 	}
 	
 	/*

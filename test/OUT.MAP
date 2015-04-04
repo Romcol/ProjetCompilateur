@@ -1,9 +1,13 @@
 
  Start  Stop   Length Name               Class
 
- 00000H 00190H 00191H _TEXT              CODE
- 00192H 001B5H 00024H _DATA              DATA
+ 00000H 00112H 00113H _TEXT              CODE
+ 00114H 0011FH 0000CH _DATA              DATA
 
+Undefined symbol 'ECRCH' in module OUT.ASM
+Undefined symbol 'LIRENT' in module OUT.ASM
+Undefined symbol 'ECRENT' in module OUT.ASM
+Undefined symbol 'LIGSUIV' in module OUT.ASM
 Program entry point at 0000:0000
 Warning: no stack
 
