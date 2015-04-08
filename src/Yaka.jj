@@ -201,8 +201,12 @@ void instruction() : {}
 	| lecture()
 	| ecriture()
 	| iteration()
+	| conditionnelle()
 }
-
+void conditionnelle() : {}
+{
+	<SI> {conditionnelle.push();} expression() {conditionnelle.checkExprType(expression.getFinalType());} <ALORS> suiteInstr() (<SINON> {conditionnelle.otherwise();} suiteInstr())? <FSI> {conditionnelle.close();}
+}
 void iteration() : {}
 {
 	<TANTQUE> {iteration.push();}
