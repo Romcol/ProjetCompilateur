@@ -35,3 +35,4 @@ public class Iteration implements Constants{
 		Yaka.yvm.iffaux("FAIT" + pileIt.lastElement());
 	}
 }
+ 

@@ -119,27 +119,34 @@ public class YVM implements Constants{
 		else if(finalType == ValueType.BOOLEEN)
 			ecrireBool();
 	}
-
 	
-	// ITERATION
+	// ITERATION & CONDITIONNELLE
 	
 	public void beginIt(int itIdent) {
 		ecrireDeb("FAIRE" + itIdent + ":");
 		System.out.println("truc");
 	}
 	
-	public void iffaux(int itIdent) {
-		ecrire("iffaux FAIT" + itIdent + ":");
+	public void iffaux(String label) {
+		ecrire("iffaux "+ label + ":");
 	}
 
-	public void igoto(int id) {
-		ecrire("goto FAIRE" + id);		
+	public void igoto(String label) {
+		ecrire("goto " + label);		
 	}
 
 	public void closeIt(int id) {
 		ecrireDeb("FAIT" + id + ":");
 	}
 	
+	public void sinon(int id)
+	{
+		ecrire("SINON" + id + ":");
+	}
+	public void finsi(int id)
+	{
+		ecrire("FSI" + id + ":");
+	}
 	/*
 	 * calcule un offset à partir d'un index. Ex :
 	 * 0 -> -2
