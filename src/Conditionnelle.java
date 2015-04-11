@@ -1,37 +1,47 @@
 import java.util.EmptyStackException;
 import java.util.Stack;
 
-
-public class Iteration implements Constants{
+public class Conditionnelle implements Constants{
+	
+	
 	private int itIdent = 0;
-	private Stack<Integer> pileIt= new Stack<Integer>();
+	private Stack<Integer> pileCond = new Stack<Integer>();
+	
 	
 	public void push()
 	{
 		itIdent++;
-		pileIt.push(itIdent);
+		pileCond.push(itIdent);
 		
-		Yaka.yvm.beginIt(itIdent);
+		Yaka.yvm.beginCond(itIdent);
+	}
+	
+	public void otherwise() {
+		
+		
+		
 	}
 	
 	public void close (){
 		try{
-			int id = pileIt.pop();
-			Yaka.yvm.igoto("FAIT" + id);
+			int id = pileCond.pop();
+			Yaka.yvm.igoto(id);
 			Yaka.yvm.closeIt(id);
 		}
 		catch(EmptyStackException e) {
 			Yaka.yvm.ecrireErreur("Unexpected end of iteration");
 		}
-	
 	}
 	
+	
+
+
 	public void checkExprType (ValueType type)
 	{
 		if (type != ValueType.BOOLEEN){
 			Yaka.yvm.ecrireErreur("Expected boolean expression in TANTQUE");
 		}
 		
-		Yaka.yvm.iffaux("FAIT" + pileIt.lastElement());
+		Yaka.yvm.iffaux(pileCond.lastElement());
 	}
 }
