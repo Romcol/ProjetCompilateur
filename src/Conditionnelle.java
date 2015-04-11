@@ -35,9 +35,6 @@ public class Conditionnelle implements Constants{
 			Yaka.yvm.ecrireErreur("Unexpected end of iteration");
 		}
 	}
-	
-	
-
 
 	public void checkExprType (ValueType type)
 	{

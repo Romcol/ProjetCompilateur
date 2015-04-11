@@ -211,10 +211,6 @@ public class YVMasm extends YVM{
 	
 	// ITERATION
 	
-	public void beginIt(int itIdent) {
-		super.beginIt(itIdent);
-		//ecrireDeb("FAIRE" + itIdent + ":");
-	}
 
 	public void iffaux(String label) {
 		super.iffaux(label);
@@ -226,10 +222,6 @@ public class YVMasm extends YVM{
 	public void igoto(String label) {
 		super.igoto(label);
 		ecrire("jmp " + label);		
-	}
-	
-	public void closeIt(int id) {
-		super.closeIt(id);
 	}
 	
 	public void label(String label) {

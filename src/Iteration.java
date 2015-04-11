@@ -10,15 +10,14 @@ public class Iteration implements Constants{
 	{
 		itIdent++;
 		pileIt.push(itIdent);
-		
-		Yaka.yvm.beginIt(itIdent);
+		Yaka.yvm.label("FAIRE" + itIdent);
 	}
 	
 	public void close (){
 		try{
 			int id = pileIt.pop();
 			Yaka.yvm.igoto("FAIRE" + id);
-			Yaka.yvm.closeIt(id);
+			Yaka.yvm.label("FAIT" + id);
 		}
 		catch(EmptyStackException e) {
 			Yaka.yvm.ecrireErreur("Unexpected end of iteration");

@@ -122,11 +122,6 @@ public class YVM implements Constants{
 	
 	// ITERATION & CONDITIONNELLE
 	
-	public void beginIt(int itIdent) {
-		ecrireDeb("FAIRE" + itIdent + ":");
-		System.out.println("truc");
-	}
-	
 	public void iffaux(String label) {
 		ecrire("iffaux "+ label + ":");
 	}
@@ -135,34 +130,9 @@ public class YVM implements Constants{
 		ecrire("goto " + label);		
 	}
 
-	public void closeIt(int id) {
-		ecrireDeb("FAIT" + id + ":");
-	}
-	
-	public void sinon(int id)
-	{
-		ecrire("SINON" + id + ":");
-	}
-	public void finsi(int id)
-	{
-		ecrire("FSI" + id + ":");
-	}
-	
-	
 	public void label(String label) {
 		ecrireDeb(label + ":");
 	}
-	
-	/*
-	 * calcule un offset à partir d'un index. Ex :
-	 * 0 -> -2
-	 * 1 -> -4
-	 * 2 -> -6 ...
-	 */
-	protected int indexToOffset(int index) {
-		return -2 * (index + 1);
-	}
-
 	
 	private void ecrire(String str) {
 		Ecriture.ecrireString(out,"\n\t;" + str + "\n");

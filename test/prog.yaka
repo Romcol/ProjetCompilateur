@@ -1,6 +1,32 @@
 PROGRAMME iter1
 VAR ENTIER s,i,j,n;
 
+
+
+	i=1;
+	j=2;
+
+	SI j>i ALORS
+		ECRIRE("OK");
+
+		SI j<i ALORS
+			ECRIRE("POK");
+		SINON
+			ECRIRE("OK");
+
+			SI j<i ALORS
+				ECRIRE("POK");
+			SINON
+				ECRIRE("OK");
+			FSI ;
+
+		FSI ;
+
+	SINON
+		ECRIRE("POK");
+	FSI ;
+FPROGRAMME
+
 	i=1; j=1; n=10;
 
 	TANTQUE i<=n FAIRE
@@ -18,29 +44,3 @@ VAR ENTIER s,i,j,n;
 
 		i=i+1;
 	FAIT;
-
-FPROGRAMME
-
-
-	i=1;
-	j=2;
-
-	SI j>i ALORS
-		ECRIRE("OK");
-
-		SI j<i ALORS
-			ECRIRE("POK");
-		SINON
-			ECRIRE("OK");
-
-			SI j<i ALORS
-				ECRIRE("OK");
-			SINON
-				ECRIRE("POK");
-			FSI ;
-
-		FSI ;
-
-	SINON
-		ECRIRE("POK");
-	FSI ;
