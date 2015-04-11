@@ -24,6 +24,7 @@ public class Yaka implements Constants {
 	public static Affectation affectation = new Affectation();
 	public static YVM yvm = new YVMasm();
 	public static Iteration iteration = new Iteration();
+	public static Conditionnelle conditionnelle = new Conditionnelle();
 
 	public static void main(String args[]) { 
 		Yaka analyseur;
@@ -205,11 +206,15 @@ void instruction() : {}
 }
 void conditionnelle() : {}
 {
-	<SI> {conditionnelle.push();} expression() {conditionnelle.checkExprType(expression.getFinalType());} <ALORS> suiteInstr() (<SINON> {conditionnelle.otherwise();} suiteInstr())? <FSI> {conditionnelle.close();}
+	<SI> {conditionnelle.open();}
+		expression() {conditionnelle.checkExprType(expression.getFinalType());}
+	<ALORS> suiteInstr() { conditionnelle.endThen(); }
+	(<SINON> suiteInstr())?
+	<FSI> {conditionnelle.close();}
 }
 void iteration() : {}
 {
-	<TANTQUE> {iteration.push();}
+	<TANTQUE> {iteration.open();}
 	expression() {iteration.checkExprType(expression.getFinalType());}
 	<FAIRE>
 		suiteInstr() 

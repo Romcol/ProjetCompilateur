@@ -1,32 +1,46 @@
 PROGRAMME iter1
-VAR ENTIER s,i,n;
-	ECRIRE("n=");
-	LIRE(n);
-	i=1; s=0;
+VAR ENTIER s,i,j,n;
+
+	i=1; j=1; n=10;
 
 	TANTQUE i<=n FAIRE
-		s=s+i;
-		i=i+1;
-		ECRIRE(s);
-		ECRIRE(i);
-	FAIT;
 
-	ALALIGNE;
-	ECRIRE("s=");
-	ECRIRE(s);
+		j=1;
+		TANTQUE j<=n FAIRE
+			ECRIRE("(");
+			ECRIRE(i);
+			ECRIRE(",");
+			ECRIRE(j);
+			ECRIRE(")");
+			ALALIGNE;
+			j=j+1;
+		FAIT;
+
+		i=i+1;
+	FAIT;
 
 FPROGRAMME
 
 
-ECRIRE("n=");
-LIRE(n);
-i=1; s=0;
+	i=1;
+	j=2;
 
-TANTQUE i<=n FAIRE
-	s=s+i;
-	i=i+1;
-FAIT;
+	SI j>i ALORS
+		ECRIRE("OK");
 
-ALALIGNE;
-ECRIRE("s=");
-ECRIRE(s);
+		SI j<i ALORS
+			ECRIRE("POK");
+		SINON
+			ECRIRE("OK");
+
+			SI j<i ALORS
+				ECRIRE("OK");
+			SINON
+				ECRIRE("POK");
+			FSI ;
+
+		FSI ;
+
+	SINON
+		ECRIRE("POK");
+	FSI ;

@@ -8,25 +8,28 @@ public class Conditionnelle implements Constants{
 	private Stack<Integer> pileCond = new Stack<Integer>();
 	
 	
-	public void push()
+	public void open()
 	{
 		itIdent++;
 		pileCond.push(itIdent);
-		
-		Yaka.yvm.beginCond(itIdent);
 	}
 	
-	public void otherwise() {
+	public void endThen() {
 		
-		
-		
+		try{
+			int id = pileCond.lastElement();
+			Yaka.yvm.igoto("FSI" + id);
+			Yaka.yvm.label("SINON" + id);
+		}
+		catch(EmptyStackException e) {
+			Yaka.yvm.ecrireErreur("Unexpected end of iteration");
+		}		
 	}
 	
 	public void close (){
 		try{
 			int id = pileCond.pop();
-			Yaka.yvm.igoto(id);
-			Yaka.yvm.closeIt(id);
+			Yaka.yvm.label("FSI" + id);
 		}
 		catch(EmptyStackException e) {
 			Yaka.yvm.ecrireErreur("Unexpected end of iteration");
@@ -42,6 +45,6 @@ public class Conditionnelle implements Constants{
 			Yaka.yvm.ecrireErreur("Expected boolean expression in TANTQUE");
 		}
 		
-		Yaka.yvm.iffaux(pileCond.lastElement());
+		Yaka.yvm.iffaux("SINON" + pileCond.lastElement());
 	}
 }

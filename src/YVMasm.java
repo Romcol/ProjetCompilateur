@@ -216,21 +216,26 @@ public class YVMasm extends YVM{
 		//ecrireDeb("FAIRE" + itIdent + ":");
 	}
 
-	public void iffaux(int itIdent) {
-		super.iffaux(itIdent);
+	public void iffaux(String label) {
+		super.iffaux(label);
 		ecrire("pop ax");
 		ecrire("cmp ax, 0");
-		ecrire("je FAIT" + itIdent);
+		ecrire("je " + label);
 	}
 	
-	public void igoto(int id) {
-		super.igoto(id);
-		ecrire("jmp FAIRE" + id);		
+	public void igoto(String label) {
+		super.igoto(label);
+		ecrire("jmp " + label);		
 	}
 	
 	public void closeIt(int id) {
 		super.closeIt(id);
 	}
+	
+	public void label(String label) {
+		super.label(label);
+	}
+
 	
 	private void ecrire(String str) {
 		Ecriture.ecrireString(out,"\t" + str + "\n");

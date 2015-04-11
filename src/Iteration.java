@@ -6,7 +6,7 @@ public class Iteration implements Constants{
 	private int itIdent = 0;
 	private Stack<Integer> pileIt= new Stack<Integer>();
 	
-	public void push()
+	public void open()
 	{
 		itIdent++;
 		pileIt.push(itIdent);
@@ -17,7 +17,7 @@ public class Iteration implements Constants{
 	public void close (){
 		try{
 			int id = pileIt.pop();
-			Yaka.yvm.igoto("FAIT" + id);
+			Yaka.yvm.igoto("FAIRE" + id);
 			Yaka.yvm.closeIt(id);
 		}
 		catch(EmptyStackException e) {

@@ -1,4 +1,5 @@
 /bin/
 test/*.[aA][sS][mM]
-/test/*.obj
+test/*.[mM][aA][pP]
+/test/out.obj
 /test/*.exe

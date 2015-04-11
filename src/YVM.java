@@ -147,6 +147,12 @@ public class YVM implements Constants{
 	{
 		ecrire("FSI" + id + ":");
 	}
+	
+	
+	public void label(String label) {
+		ecrireDeb(label + ":");
+	}
+	
 	/*
 	 * calcule un offset à partir d'un index. Ex :
 	 * 0 -> -2

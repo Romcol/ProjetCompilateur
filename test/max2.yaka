@@ -1,0 +1,15 @@
+PROGRAMME max2
+VAR ENTIER i,j,max;
+	LIRE(i);
+	ALALIGNE;
+	LIRE(j);
+	ALALIGNE;
+	max = j;
+
+	SI i>j ALORS
+		max = i;
+	SINON
+		ALALIGNE;
+	FSI ;
+	ECRIRE(max);
+FPROGRAMME
