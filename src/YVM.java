@@ -159,6 +159,12 @@ public class YVM implements Constants{
 		ecrire("ireturn " + n);
 	}
 
+	public void call(String s){
+		ecrire("call "+s);
+	}
+	public void reserveRetour(){
+		ecrire("reserveRetour");
+	}
 	public void ecrireOp(Constants.Operation op) {
 		switch (op) {
 			case EQUAL: 	iegal();	break;

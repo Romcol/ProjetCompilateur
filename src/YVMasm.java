@@ -236,5 +236,37 @@ public class YVMasm extends YVM{
 	private void ecrireDeb(String str) {
 		Ecriture.ecrireString(out,str+"\n");
 	}
+	
+	//FUNCTION
+	
+	public void ouvBloc(int n)
+	{
+		super.ouvBloc(n);
+		ecrire("enter "+n+",0");
+	}
+	
+	public void fermeBloc(int n)
+	{
+		super.fermeBloc(n);
+		ecrire("leave");
+		ecrire("ret "+n);
+	}
 
+	public void ireturn(int n)
+	{
+		super.ireturn(n);
+		ecrire("pop ax");
+		ecrire("mov [bp+"+n+"],ax");
+	}
+
+	public void call(String s)
+	{
+		super.call(s);
+		ecrire("call "+s);
+	}
+	
+	public void reserveRetour(){
+		super.reserveRetour();
+		ecrire("sub sp,2");
+	}
 }
