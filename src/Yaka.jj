@@ -25,6 +25,7 @@ public class Yaka implements Constants {
 	public static YVM yvm = new YVMasm();
 	public static Iteration iteration = new Iteration();
 	public static Conditionnelle conditionnelle = new Conditionnelle();
+	public static Fonction fonction = new Fonction();
 
 	public static void main(String args[]) { 
 		Yaka analyseur;
@@ -63,8 +64,9 @@ PARSER_END(Yaka)
 /***************************************/
 
 TOKEN_MGR_DECLS :
-{public static String identLu,chaineLue;
- public static int entierLu;}
+{public static String identLu,chaineLue,typeLu;
+ public static int entierLu;
+}
 
 /*** Skip whitespace and comments ***/
 SKIP :
@@ -134,7 +136,8 @@ TOKEN  :
 | < chaine : "\"" (~["\""])* "\"" | "'" (~["'"])* "'" >
 	{ chaineLue = image.toString();
 	 }
-| < type : "ENTIER" | "BOOLEEN" >
+| < type : ("ENTIER" | "BOOLEEN") >
+	{ typeLu = image.toString();}
 }
 
 
@@ -160,7 +163,15 @@ void bloc() : {}{
 
 void declFonction() : {}
 {
-	<type> <FONCTION> <ident> paramForms() bloc() <FFONCTION>
+	{ fonction.init(); }
+
+	<type> { fonction.setReturnType(YakaTokenManager.typeLu); }
+
+	 <FONCTION> 
+	 <ident> { fonction.setName(YakaTokenManager.identLu); }
+	 paramForms() {fonction.noMoreParams();}
+	 bloc()
+	 <FFONCTION> {fonction.addFunct();}
 }
 
 void paramForms() : {}
@@ -170,7 +181,7 @@ void paramForms() : {}
 
 void paramForm() : {}
 {
-	<type> <ident>
+	<type> <ident> { fonction.newParam(YakaTokenManager.typeLu, YakaTokenManager.identLu); }
 }
 
 void declConst() : {}
@@ -206,7 +217,7 @@ void declVar() : {}
 
 void type() : {}
 {
-	 <ENTIER> { declaration.setCurrentType(ValueType.ENTIER);}
+	 <ENTIER> { declaration.setCurrentType(ValueType.ENTIER); }
  | <BOOLEEN> { declaration.setCurrentType(ValueType.BOOLEEN);}
 }
 /*
@@ -227,7 +238,7 @@ void instruction() : {}
 
 void retourne() : {}
 {
-	<RETOURNE> expression()
+	<RETOURNE> expression() {function.retourne();}
 }
 
 void conditionnelle() : {}

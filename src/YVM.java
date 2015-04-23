@@ -141,7 +141,23 @@ public class YVM implements Constants{
 	private void ecrireDeb(String str) {
 		Ecriture.ecrireString(out,"\n" + str + "\n");
 	}
+	
+	//FONCTIONS
+	
+	public void ouvBloc(int n)
+	{
+		ecrire("ouvbloc " + n);
+	}
+	
+	public void fermeBloc(int n)
+	{
+		ecrire("fermebloc " + n);
+	}
 
+	public void ireturn(int n)
+	{
+		ecrire("ireturn " + n);
+	}
 
 	public void ecrireOp(Constants.Operation op) {
 		switch (op) {
