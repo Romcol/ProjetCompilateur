@@ -64,7 +64,7 @@ PARSER_END(Yaka)
 /***************************************/
 
 TOKEN_MGR_DECLS :
-{public static String identLu,chaineLue,typeLu;
+{public static String identLu,chaineLue;
  public static int entierLu;
 }
 
@@ -136,8 +136,6 @@ TOKEN  :
 | < chaine : "\"" (~["\""])* "\"" | "'" (~["'"])* "'" >
 	{ chaineLue = image.toString();
 	 }
-| < type : ("ENTIER" | "BOOLEEN") >
-	{ typeLu = image.toString();}
 }
 
 
@@ -165,7 +163,7 @@ void declFonction() : {}
 {
 	{ fonction.init(); }
 
-	<type> { fonction.setReturnType(YakaTokenManager.typeLu); }
+	type()
 
 	 <FONCTION> 
 	 <ident> { fonction.setName(YakaTokenManager.identLu); }
@@ -181,7 +179,7 @@ void paramForms() : {}
 
 void paramForm() : {}
 {
-	<type> <ident> { fonction.newParam(YakaTokenManager.typeLu, YakaTokenManager.identLu); }
+	type()  <ident> { fonction.newParam(YakaTokenManager.identLu); }
 }
 
 void declConst() : {}
@@ -217,8 +215,8 @@ void declVar() : {}
 
 void type() : {}
 {
-	 <ENTIER> { declaration.setCurrentType(ValueType.ENTIER); }
- | <BOOLEEN> { declaration.setCurrentType(ValueType.BOOLEEN);}
+	 <ENTIER> { declaration.setCurrentType(ValueType.ENTIER); } { fonction.setReturnType(ValueType.ENTIER); }
+ | <BOOLEEN> { declaration.setCurrentType(ValueType.BOOLEEN);} { fonction.setReturnType(ValueType.BOOLEEN); }
 }
 /*
  * Syntaxe des instructions.

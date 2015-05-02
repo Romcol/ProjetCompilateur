@@ -28,12 +28,10 @@ public class Fonction implements Constants {
 		Yaka.yvm.label(name);
 	}
 	
-	public void newParam(String type, String ident) {
+	public void newParam(String ident) {
 		
-		ValueType valueType = stringToValueType(type);
-		
-		this.typeParams.add(valueType);
-		Yaka.tabIdent.rangeParam(ident, new IdVar(ident, valueType));
+		this.typeParams.add(this.returnType);
+		Yaka.tabIdent.rangeParam(ident, new IdVar(ident, this.returnType));
 	}
 	
 	public ValueType stringToValueType(String type) {
