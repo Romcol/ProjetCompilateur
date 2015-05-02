@@ -102,7 +102,7 @@ public class Yaka implements Constants, YakaConstants {
     jj_consume_token(ident);
                    fonction.setName(YakaTokenManager.identLu);
     paramForms();
-                       fonction.noMoreParams();
+                       fonction.noMoreParam();
     bloc();
     jj_consume_token(FFONCTION);
                       fonction.addFunct();
@@ -308,7 +308,7 @@ public class Yaka implements Constants, YakaConstants {
   static final public void retourne() throws ParseException {
     jj_consume_token(RETOURNE);
     expression();
-                                 function.retourne();
+                                 fonction.retourne();
   }
 
   static final public void conditionnelle() throws ParseException {

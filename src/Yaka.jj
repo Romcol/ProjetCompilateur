@@ -167,7 +167,7 @@ void declFonction() : {}
 
 	 <FONCTION> 
 	 <ident> { fonction.setName(YakaTokenManager.identLu); }
-	 paramForms() {fonction.noMoreParams();}
+	 paramForms() {fonction.noMoreParam();}
 	 bloc()
 	 <FFONCTION> {fonction.addFunct();}
 }
@@ -236,7 +236,7 @@ void instruction() : {}
 
 void retourne() : {}
 {
-	<RETOURNE> expression() {function.retourne();}
+	<RETOURNE> expression() {fonction.retourne();}
 }
 
 void conditionnelle() : {}

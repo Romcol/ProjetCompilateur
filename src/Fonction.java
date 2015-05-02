@@ -15,12 +15,11 @@ public class Fonction implements Constants {
 		Yaka.tabIdent.initLocaux();
 	}
 	
-	public void setReturnType(String type) {
-		ValueType returnType = stringToValueType(type);
+	public void setReturnType(ValueType returnType) {
 		if(returnType != null) 
 			this.returnType = returnType;
 		else
-			Yaka.yvm.ecrireErreur("Type de retour incorrecte ("+type+")");
+			Yaka.yvm.ecrireErreur("Type de retour incorrecte ("+returnType+")");
 	}
 	
 	public void setName(String name) {
