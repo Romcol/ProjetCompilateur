@@ -5,19 +5,21 @@ public class Fonction implements Constants {
 	
 	private String name;
 	private ValueType returnType;
-	private List<ValueType> typeParams = new ArrayList<ValueType>();
+	private List<IdVar> params = new ArrayList<IdVar>();
 	
 	public void init() {
 		this.name = null;
 		this.returnType = null;
-		this.typeParams.clear();
+		this.params.clear();
 		
 		Yaka.tabIdent.initLocaux();
 	}
 	
 	public void setReturnType(ValueType returnType) {
 		if(returnType != null) 
+		{
 			this.returnType = returnType;
+		}
 		else
 			Yaka.yvm.ecrireErreur("Type de retour incorrecte ("+returnType+")");
 	}
@@ -28,9 +30,17 @@ public class Fonction implements Constants {
 	}
 	
 	public void newParam(String ident) {
-		
-		this.typeParams.add(this.returnType);
-		Yaka.tabIdent.rangeParam(ident, new IdVar(ident, this.returnType));
+		IdVar newident = new IdVar(ident, this.returnType);
+		Yaka.tabIdent.rangeParam(ident, newident);
+		this.params.add(newident);
+	}
+	
+	public void noMoreParams(){
+		int nbParam = Yaka.tabIdent.getNbParam();
+		for (IdVar ident : params) {
+			 int idRank = ident.getValue();
+			 ident.setValue(4+(nbParam-idRank)*2);
+		}
 	}
 	
 	public ValueType stringToValueType(String type) {
@@ -43,16 +53,12 @@ public class Fonction implements Constants {
 	}
 	
 	public void addFunct(){
-		Yaka.tabIdent.rangeIdent(name, new IdFunct(name, returnType, typeParams));
+		Yaka.tabIdent.rangeIdent(name, new IdFunct(name, returnType, params));
 		Yaka.yvm.fermeBloc(Yaka.tabIdent.getNbParam()*2);
 	}
 	
-	public void noMoreParam(){
-		Yaka.yvm.ouvBloc(Yaka.tabIdent.getNbVar()*2);
-	}
-	
 	public void retourne(){
-		Yaka.yvm.ireturn(Yaka.tabIdent.getNbParam()*2+2);
+		Yaka.yvm.ireturn(Yaka.tabIdent.getNbParam()*2+4);
 	}
 	
 }

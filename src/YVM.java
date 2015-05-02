@@ -16,8 +16,13 @@ public class YVM implements Constants{
 		ecrire("entete");
 	}
 	
+	public void main()
+	{
+		ecrire("entete main");
+	}
+	
 	public void alloc() {
-		ecrire("ouvrePrinc " + Yaka.tabIdent.getNbVar() * 2);
+		ecrire("ouvbloc " + Yaka.tabIdent.getNbVar() * 2);
 	}
 	
 	public void iconst(int value){
@@ -123,7 +128,7 @@ public class YVM implements Constants{
 	// ITERATION & CONDITIONNELLE
 	
 	public void iffaux(String label) {
-		ecrire("iffaux "+ label + ":");
+		ecrire("iffaux "+ label);
 	}
 
 	public void igoto(String label) {

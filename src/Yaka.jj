@@ -144,16 +144,15 @@ TOKEN  :
 /**************************************/
 void analyse() : {}
 {
-	 <PROGRAMME> <ident>
+	 <PROGRAMME> <ident> {yvm.entete();}
 	 (declFonction())*
 	 <PRINCIPAL>
 	 bloc()
-	 <FPRINCIPAL>
+	 <FPRINCIPAL> {yvm.main();}
 	 <FPROGRAMME> { yvm.queue(); }
 }
 
 void bloc() : {}{
-	{yvm.entete();}
  (declConst())*
  (declVar())*  { yvm.alloc();}
   suiteInstr()
@@ -167,14 +166,14 @@ void declFonction() : {}
 
 	 <FONCTION> 
 	 <ident> { fonction.setName(YakaTokenManager.identLu); }
-	 paramForms() {fonction.noMoreParam();}
+	 paramForms() {fonction.noMoreParams();}
 	 bloc()
 	 <FFONCTION> {fonction.addFunct();}
 }
 
 void paramForms() : {}
 {
-	(paramForm()(","paramForm())*)?
+	"("(paramForm()(","paramForm())*)?")"
 }
 
 void paramForm() : {}
@@ -321,7 +320,7 @@ void valeur() : {}
 
 void argumentsFonction() : {}
 {
-	expression()(","expression())*
+	"("(expression()(","expression())*)?")"
 }
 
 void opRel() : {}

@@ -12,14 +12,19 @@ public class YVMasm extends YVM{
 		ecrireDeb(".model SMALL");
 		ecrireDeb(".386");
 		ecrireDeb(".CODE");
+	}
+	
+	public void main()
+	{
+		super.main();
 		ecrire("debut :");
 		ecrire("STARTUPCODE");
+		ecrire("main :");
 	}
 	
 	public void alloc() {
 		super.alloc();
-		ecrire("mov bp, sp");
-		ecrire("sub sp," + Yaka.tabIdent.getNbVar() * 2);
+		ecrire("enter "+Yaka.tabIdent.getNbVar() * 2+",0");
 	}
 
 	public void iconst(int value) {
@@ -29,7 +34,7 @@ public class YVMasm extends YVM{
 	
 	public void iload(int offset) {
 		super.iload(offset);
-		ecrire("push word ptr [bp" + offset + "]");
+		ecrire("push word ptr [bp+" + offset + "]");
 	}
 	
 	public void istore(int offset) {

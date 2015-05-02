@@ -44,9 +44,9 @@ public class TabIdent {
 	}
 	
 	public void rangeParam(String clef, IdVar id) {
-		id.setValue((nbParam+2)*2);	
-		table_locaux.put(clef, id);
 		this.nbParam++;
+		id.setValue(nbParam);
+		table_locaux.put(clef, id);
 	}
 
 	public void rangeIdent(String clef, IdFunct id) {
