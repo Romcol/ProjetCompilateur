@@ -26,6 +26,7 @@ public class Yaka implements Constants {
 	public static Iteration iteration = new Iteration();
 	public static Conditionnelle conditionnelle = new Conditionnelle();
 	public static Fonction fonction = new Fonction();
+	public static AppelFonction appelFonction = new AppelFonction();
 
 	public static void main(String args[]) { 
 		Yaka analyseur;
@@ -146,9 +147,9 @@ void analyse() : {}
 {
 	 <PROGRAMME> <ident> {yvm.entete();}
 	 (declFonction())*
-	 <PRINCIPAL>
+	 <PRINCIPAL> {yvm.main();}
 	 bloc()
-	 <FPRINCIPAL> {yvm.main();}
+	 <FPRINCIPAL>
 	 <FPROGRAMME> { yvm.queue(); }
 }
 
@@ -313,14 +314,15 @@ void primaire(): {}
 
 void valeur() : {}
 { <entier> 	{expression.pushInt(YakaTokenManager.entierLu);}	
- | <ident> 	{expression.pushType(YakaTokenManager.identLu);} (argumentsFonction())?
+ | <ident> 	{appelFonction.init(YakaTokenManager.identLu);} (argumentsFonction())? {appelFonction.endOfCall();}
  | <VRAI> 	{expression.pushBool(-1);}	
  | <FAUX> 	{expression.pushBool(0);}
 }
 
 void argumentsFonction() : {}
 {
-	"("(expression()(","expression())*)?")"
+	"("(expression(){ appelFonction.addArgument(expression.getFinalType()); }
+	(","expression() { appelFonction.addArgument(expression.getFinalType()); } )*)?")"
 }
 
 void opRel() : {}

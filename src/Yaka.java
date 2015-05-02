@@ -8,6 +8,7 @@ public class Yaka implements Constants, YakaConstants {
         public static Iteration iteration = new Iteration();
         public static Conditionnelle conditionnelle = new Conditionnelle();
         public static Fonction fonction = new Fonction();
+        public static AppelFonction appelFonction = new AppelFonction();
 
         public static void main(String args[]) {
                 Yaka analyseur;
@@ -60,9 +61,9 @@ public class Yaka implements Constants, YakaConstants {
       declFonction();
     }
     jj_consume_token(PRINCIPAL);
+                      yvm.main();
     bloc();
     jj_consume_token(FPRINCIPAL);
-                       yvm.main();
     jj_consume_token(FPROGRAMME);
                         yvm.queue();
   }
@@ -513,7 +514,7 @@ public class Yaka implements Constants, YakaConstants {
       break;
     case ident:
       jj_consume_token(ident);
-                 expression.pushType(YakaTokenManager.identLu);
+                 appelFonction.init(YakaTokenManager.identLu);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case 40:
         argumentsFonction();
@@ -522,6 +523,7 @@ public class Yaka implements Constants, YakaConstants {
         jj_la1[21] = jj_gen;
         ;
       }
+                                                                                        appelFonction.endOfCall();
       break;
     case VRAI:
       jj_consume_token(VRAI);
@@ -549,6 +551,7 @@ public class Yaka implements Constants, YakaConstants {
     case 40:
     case 51:
       expression();
+                          appelFonction.addArgument(expression.getFinalType());
       label_10:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -561,6 +564,7 @@ public class Yaka implements Constants, YakaConstants {
         }
         jj_consume_token(41);
         expression();
+                           appelFonction.addArgument(expression.getFinalType());
       }
       break;
     default:

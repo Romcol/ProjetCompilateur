@@ -19,6 +19,10 @@ public class TabIdent {
 		return table_locaux.get(clef);
 	}
 	
+	public IdFunct chercheFonction(String clef)
+	{
+		return table_globaux.get(clef);
+	}
 	public boolean existeIdent(String clef){
 		return table_locaux.containsKey(clef);
 	}

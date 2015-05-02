@@ -161,8 +161,14 @@ sup:
 	;aLaLigne
 	call ligsuiv
 
+	;reserveRetour
+	sub sp,2
+
 	;iload -2
 	push word ptr [bp+-2]
+
+	;reserveRetour
+	sub sp,2
 
 	;iload -4
 	push word ptr [bp+-4]
@@ -179,8 +185,14 @@ sup:
 	add ax,bx
 	push ax
 
+	;reserveRetour
+	sub sp,2
+
 	;iconst 1
 	push word ptr 1
+
+	;reserveRetour
+	sub sp,2
 
 	;iload -2
 	push word ptr [bp+-2]
@@ -202,6 +214,9 @@ sup:
 	pop ax
 	add ax,bx
 	push ax
+
+	;reserveRetour
+	sub sp,2
 
 	;iload -2
 	push word ptr [bp+-2]

@@ -21,4 +21,8 @@ abstract public class Ident implements Constants{
 	public void setValue(int value) {
 		this.value = value;
 	}
+	
+	public String getName(){
+		return this.name;
+	}
 }

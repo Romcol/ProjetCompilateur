@@ -10,7 +10,6 @@ public class Expression implements Constants{
 	
 	public void eval(){
 		
-		
 		if(pileType.isEmpty() || pileOp.isEmpty())
 			return;
 		
@@ -135,9 +134,9 @@ public class Expression implements Constants{
 	}
 	
 	public ValueType getFinalType() {
-		
 		if(pileType.size() != 1) {
 			Yaka.yvm.ecrireErreur("La pile doit contenir 1 type a la fin de l'analyse de l'expression.");
+			System.out.println("nombre :"+pileType.size());
 			return null;
 		}
 		return pileType.pop();

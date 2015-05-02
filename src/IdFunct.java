@@ -12,4 +12,9 @@ public class IdFunct implements Constants {
 		this.params = params;
 	}
 	
+	public List<IdVar> getParams()
+	{
+		return this.params;
+	}
+	
 }

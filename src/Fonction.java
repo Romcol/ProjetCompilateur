@@ -58,6 +58,11 @@ public class Fonction implements Constants {
 	}
 	
 	public void retourne(){
+		/* ValueType finalType 
+		if(finalType != returnType)
+		{
+			Yaka.yvm.ecrireErreur("Return type is "+finalType+" when expected "+returnType);
+		}*/
 		Yaka.yvm.ireturn(Yaka.tabIdent.getNbParam()*2+4);
 	}
 	
