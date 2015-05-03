@@ -79,7 +79,7 @@ public class AppelFonction implements Constants{
 				
 				if(expected != encountered) {
 					paramsOk = false;
-					Yaka.yvm.ecrireErreur("Incorrect parameter n°" + i + " : " + expected + " expected, " + encountered + "encountered.");
+					Yaka.yvm.ecrireErreur("Incorrect parameter n°" + i + " : " + expected + " expected, " + encountered + " encountered.");
 				}
 				if(!paramsOk)
 					return;
