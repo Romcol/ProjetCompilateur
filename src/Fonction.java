@@ -63,6 +63,7 @@ public class Fonction implements Constants {
 	public void addFunct(){
 		Yaka.tabIdent.rangeIdent(name, new IdFunct(name, returnType, params));
 		Yaka.yvm.fermeBloc(Yaka.tabIdent.getNbParam()*2);
+		Yaka.tabIdent.initLocaux();
 	}
 	
 	public void retourne(ValueType finalType ){

@@ -18,7 +18,6 @@ public class AppelFonction implements Constants{
 		
 		if(tmpIdFunct != null)
 		{
-			System.out.println("Lecture de la fonction "+tmpIdFunct.getName());
 			stackIdFunct.push(tmpIdFunct);
 			Yaka.yvm.reserveRetour();
 		}
@@ -56,8 +55,6 @@ public class AppelFonction implements Constants{
 			
 			ArrayList<ValueType> arguments = stackArguments.pop();
 			IdFunct idFunct = stackIdFunct.pop();
-			
-			System.out.println("Appel de la fonction "+idFunct.getName());
 			
 			List<IdVar> params = idFunct.getParams();
 

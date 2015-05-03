@@ -23,15 +23,24 @@ public class TabIdent {
 	{
 		return table_globaux.get(clef);
 	}
+	
 	public boolean existeIdent(String clef){
 		return table_locaux.containsKey(clef);
 	}
 	
 	public void rangeIdent(String clef, IdConst id){
+		if(table_locaux.containsKey(clef) || table_globaux.containsKey(clef))
+		{
+			Yaka.yvm.ecrireErreur("Error : Ident '"+clef+"' already exists.");
+		}
 		table_locaux.put(clef, id);
 	}
 	
 	public void rangeIdent(String clef, IdVar id){
+		if(table_locaux.containsKey(clef) || table_globaux.containsKey(clef))
+		{
+			Yaka.yvm.ecrireErreur("Error : Ident '"+clef+"' already exists.");
+		}
 		id.setValue((nbVar+1)*(-2));
 		table_locaux.put(clef, id);
 		this.nbVar++;
@@ -54,6 +63,10 @@ public class TabIdent {
 	}
 
 	public void rangeIdent(String clef, IdFunct id) {
+		if(table_locaux.containsKey(clef) || table_globaux.containsKey(clef))
+		{
+			Yaka.yvm.ecrireErreur("Error : Ident '"+clef+"' already exists.");
+		}
 		table_globaux.put(clef, id);
 	}
 	
