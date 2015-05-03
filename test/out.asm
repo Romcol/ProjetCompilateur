@@ -223,6 +223,9 @@ sup:
 	sub ax,bx
 	push ax
 
+	;call max
+	call max
+
 	;iadd
 	pop bx
 	pop ax
@@ -247,17 +250,33 @@ sup:
 	;iload -4
 	push word ptr [bp+-4]
 
+	;call min
+	call min
+
+	;call sup
+	call sup
+
+	;istore -8
+	pop ax
+	mov word ptr [bp-8],ax
+
 	;aLaLigne
 	call ligsuiv
 
 	;iload -6
 	push word ptr [bp+-6]
 
+	;ecrireEnt
+	call ecrent
+
 	;aLaLigne
 	call ligsuiv
 
 	;iload -8
 	push word ptr [bp+-8]
+
+	;ecrireBool
+	call ecrbool
 
 	;queue
 	nop

@@ -166,10 +166,7 @@ public class Expression implements Constants{
 		System.out.println("Popage de type "+typecatch);
 		return typecatch;
 	}
-	
-	public void init() {
 
-	}
 	public String toString() {
 		return pileOp.toString() + "\n" + pileType.toString();
 	}

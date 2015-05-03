@@ -20,7 +20,7 @@ PARSER_BEGIN(Yaka)
 public class Yaka implements Constants {
 	public static Declaration declaration = new Declaration();
 	public static TabIdent tabIdent = new TabIdent();
-	public static Expression expression = new Expression();
+	public static StackExpression stackExpression = new StackExpression();
 	public static Affectation affectation = new Affectation();
 	public static YVM yvm = new YVMasm();
 	public static Iteration iteration = new Iteration();
@@ -236,13 +236,13 @@ void instruction() : {}
 
 void retourne() : {}
 {
-	<RETOURNE> expression() {fonction.retourne(expression.getFinalType());}
+	<RETOURNE> expression() {fonction.retourne(stackExpression.getFinalType());}
 }
 
 void conditionnelle() : {}
 {
 	<SI> {conditionnelle.open();}
-		expression() {conditionnelle.checkExprType(expression.getFinalType());}
+		expression() {conditionnelle.checkExprType(stackExpression.getFinalType());}
 	<ALORS> suiteInstr() { conditionnelle.endThen(); }
 	(<SINON> suiteInstr())?
 	<FSI> {conditionnelle.close();}
@@ -250,7 +250,7 @@ void conditionnelle() : {}
 void iteration() : {}
 {
 	<TANTQUE> {iteration.open();}
-	expression() {iteration.checkExprType(expression.getFinalType());}
+	expression() {iteration.checkExprType(stackExpression.getFinalType());}
 	<FAIRE>
 		suiteInstr() 
 	<FAIT> {iteration.close();}
@@ -259,7 +259,7 @@ void affectation() : {}
 {
 	<ident> { affectation.setLeftIdent(YakaTokenManager.identLu); }
 	"=" expression() { 
-		affectation.setRightType(Yaka.expression.getFinalType()); affectation.eval();}
+		affectation.setRightType(stackExpression.getFinalType()); affectation.eval();}
 }
 
 void lecture() : {}
@@ -269,7 +269,7 @@ void lecture() : {}
 
 void ecriture() : {}
 {
-	<ECRIRE> "(" (expression() { yvm.ecrireValue(expression.getFinalType()); } | <chaine> { yvm.ecrireChaine(YakaTokenManager.chaineLue); }) ")"
+	<ECRIRE> "(" (expression() { yvm.ecrireValue(stackExpression.getFinalType()); } | <chaine> { yvm.ecrireChaine(YakaTokenManager.chaineLue); }) ")"
 	| <ALALIGNE> { yvm.aLaLigne(); }
 }
 
@@ -279,10 +279,10 @@ void ecriture() : {}
  */
 void expression() : {}
 {
-	{ expression.init(); }
+	{ stackExpression.newExpression(); }
 	simpleExpr() 
 	(opRel() 
-	simpleExpr() { expression.eval(); }
+	simpleExpr() { stackExpression.eval(); }
 	)?
 }
 
@@ -290,7 +290,7 @@ void simpleExpr() : {}
 {
 	 terme() 
 	 (opAdd() 
-	 terme() { expression.eval();}
+	 terme() { stackExpression.eval();}
 	 )*
 }
 
@@ -298,12 +298,12 @@ void terme() : {}
 {
 	facteur() 
 	(opMul() 
-	facteur()	{expression.eval();}
+	facteur()	{stackExpression.eval();}
 	)*
 }
 void facteur() : {}
 {   primaire() 
-	|  opNeg() primaire() {expression.evalNeg();}
+	|  opNeg() primaire() {stackExpression.evalNeg();}
 }
 
 void primaire(): {}
@@ -313,45 +313,45 @@ void primaire(): {}
 }
 
 void valeur() : {}
-{ <entier> 	{expression.pushInt(YakaTokenManager.entierLu);}	
+{ <entier> 	{stackExpression.pushInt(YakaTokenManager.entierLu);}	
  | <ident> 	{appelFonction.init(YakaTokenManager.identLu);} (argumentsFonction())? {appelFonction.endOfCall();}
- | <VRAI> 	{expression.pushBool(-1);}	
- | <FAUX> 	{expression.pushBool(0);}
+ | <VRAI> 	{stackExpression.pushBool(-1);}	
+ | <FAUX> 	{stackExpression.pushBool(0);}
 }
 
 void argumentsFonction() : {}
 {
-	"("(expression(){ appelFonction.initArguments(); appelFonction.addArgument(expression.getFinalType()); }
-	(","expression() { appelFonction.addArgument(expression.getFinalType()); } )*)?")"
+	"("(expression(){ appelFonction.initArguments(); appelFonction.addArgument(stackExpression.getFinalType()); }
+	(","expression() { appelFonction.addArgument(stackExpression.getFinalType()); } )*)?")"
 }
 
 void opRel() : {}
 {
-	 "=" 		{expression.pushOp(Operation.EQUAL);}
- | "<>" 	{expression.pushOp(Operation.NEQUAL);}
- | "<" 		{expression.pushOp(Operation.INF);}
- | "<=" 	{expression.pushOp(Operation.INFEQ);}
- | ">" 		{expression.pushOp(Operation.SUP);}
- | ">=" 	{expression.pushOp(Operation.SUPEQ);}
+	 "=" 		{stackExpression.pushOp(Operation.EQUAL);}
+ | "<>" 	{stackExpression.pushOp(Operation.NEQUAL);}
+ | "<" 		{stackExpression.pushOp(Operation.INF);}
+ | "<=" 	{stackExpression.pushOp(Operation.INFEQ);}
+ | ">" 		{stackExpression.pushOp(Operation.SUP);}
+ | ">=" 	{stackExpression.pushOp(Operation.SUPEQ);}
 } 
 
 void opAdd() : {}
 {
-		"+"		{expression.pushOp(Operation.PLUS);}
-	|  "-"	{expression.pushOp(Operation.SUB);}
-	| <OU>	{expression.pushOp(Operation.OR);}
+		"+"		{stackExpression.pushOp(Operation.PLUS);}
+	|  "-"	{stackExpression.pushOp(Operation.SUB);}
+	| <OU>	{stackExpression.pushOp(Operation.OR);}
 }
 
 void opMul() : {}
 {
-	"*"		{expression.pushOp(Operation.MUL);}
-	| "/"		{expression.pushOp(Operation.DIV);}
-	| <ET>	{expression.pushOp(Operation.AND);}
+	"*"		{stackExpression.pushOp(Operation.MUL);}
+	| "/"		{stackExpression.pushOp(Operation.DIV);}
+	| <ET>	{stackExpression.pushOp(Operation.AND);}
 } 
 
 void opNeg() : {}
-{ "-" 		{expression.pushOp(Operation.MINUS);}
- | <NON>	{expression.pushOp(Operation.NOT);}
+{ "-" 		{stackExpression.pushOp(Operation.MINUS);}
+ | <NON>	{stackExpression.pushOp(Operation.NOT);}
 }
 
 

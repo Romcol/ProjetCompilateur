@@ -12,8 +12,6 @@ public class AppelFonction implements Constants{
 	private Stack<ArrayList<ValueType>> stackArguments = new Stack<ArrayList<ValueType>>();
 	
 	public void init(String ident) {
-		
-		//this.arguments.clear();
 
 		Ident tmpIdent = Yaka.tabIdent.chercheIdent(ident);
 		IdFunct tmpIdFunct = Yaka.tabIdent.chercheFonction(ident);
@@ -50,7 +48,7 @@ public class AppelFonction implements Constants{
 		// Si IdVar/IdConst
 		if(stackIdent.size() != 0) {
 			Ident ident = stackIdent.pop();
-			Yaka.expression.pushType(ident.getName());
+			Yaka.stackExpression.pushType(ident.getName());
 		}
 		// Si IdFunct
 		else if(stackIdFunct.size() != 0){
@@ -86,7 +84,7 @@ public class AppelFonction implements Constants{
 				
 			}
 			
-			Yaka.expression.pushType(idFunct.getName());
+			Yaka.stackExpression.pushType(idFunct.getName());
 			
 			Yaka.yvm.call(idFunct.getName());
 			
