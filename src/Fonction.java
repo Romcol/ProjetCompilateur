@@ -6,6 +6,7 @@ public class Fonction implements Constants {
 	private String name;
 	private ValueType returnType;
 	private List<IdVar> params = new ArrayList<IdVar>();
+	private ValueType currentParamType;
 	
 	public void init() {
 		this.name = null;
@@ -15,13 +16,16 @@ public class Fonction implements Constants {
 		Yaka.tabIdent.initLocaux();
 	}
 	
-	public void setReturnType(ValueType returnType) {
-		if(returnType != null) 
+	public void setReturnType(ValueType rtnType) {
+		if(rtnType != null) 
 		{
-			this.returnType = returnType;
+			if(this.returnType == null)
+			{
+				this.returnType = rtnType;
+			}
 		}
 		else
-			Yaka.yvm.ecrireErreur("Type de retour incorrecte ("+returnType+")");
+			Yaka.yvm.ecrireErreur("Type de retour incorrecte ("+rtnType+")");
 	}
 	
 	public void setName(String name) {
@@ -29,8 +33,12 @@ public class Fonction implements Constants {
 		Yaka.yvm.label(name);
 	}
 	
+	public void setCurrentParamType(ValueType type){
+		this.currentParamType = type;
+	}
+	
 	public void newParam(String ident) {
-		IdVar newident = new IdVar(ident, this.returnType);
+		IdVar newident = new IdVar(ident, currentParamType);
 		Yaka.tabIdent.rangeParam(ident, newident);
 		this.params.add(newident);
 	}
@@ -57,12 +65,12 @@ public class Fonction implements Constants {
 		Yaka.yvm.fermeBloc(Yaka.tabIdent.getNbParam()*2);
 	}
 	
-	public void retourne(){
-		/* ValueType finalType 
+	public void retourne(ValueType finalType ){
 		if(finalType != returnType)
 		{
 			Yaka.yvm.ecrireErreur("Return type is "+finalType+" when expected "+returnType);
-		}*/
+			return;
+		}
 		Yaka.yvm.ireturn(Yaka.tabIdent.getNbParam()*2+4);
 	}
 	

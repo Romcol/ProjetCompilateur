@@ -220,13 +220,11 @@ public class Yaka implements Constants, YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ENTIER:
       jj_consume_token(ENTIER);
-                    declaration.setCurrentType(ValueType.ENTIER);
-                                                                      fonction.setReturnType(ValueType.ENTIER);
+                    declaration.setCurrentType(ValueType.ENTIER); fonction.setReturnType(ValueType.ENTIER); fonction.setCurrentParamType(ValueType.ENTIER);
       break;
     case BOOLEEN:
       jj_consume_token(BOOLEEN);
-               declaration.setCurrentType(ValueType.BOOLEEN);
-                                                                 fonction.setReturnType(ValueType.BOOLEEN);
+               declaration.setCurrentType(ValueType.BOOLEEN); fonction.setReturnType(ValueType.BOOLEEN); fonction.setCurrentParamType(ValueType.BOOLEEN);
       break;
     default:
       jj_la1[8] = jj_gen;
@@ -312,7 +310,7 @@ public class Yaka implements Constants, YakaConstants {
   static final public void retourne() throws ParseException {
     jj_consume_token(RETOURNE);
     expression();
-                                 fonction.retourne();
+                                 fonction.retourne(expression.getFinalType());
   }
 
   static final public void conditionnelle() throws ParseException {

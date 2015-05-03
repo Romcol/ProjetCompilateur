@@ -215,8 +215,8 @@ void declVar() : {}
 
 void type() : {}
 {
-	 <ENTIER> { declaration.setCurrentType(ValueType.ENTIER); } { fonction.setReturnType(ValueType.ENTIER); }
- | <BOOLEEN> { declaration.setCurrentType(ValueType.BOOLEEN);} { fonction.setReturnType(ValueType.BOOLEEN); }
+	 <ENTIER> { declaration.setCurrentType(ValueType.ENTIER); fonction.setReturnType(ValueType.ENTIER); fonction.setCurrentParamType(ValueType.ENTIER);}
+ | <BOOLEEN> { declaration.setCurrentType(ValueType.BOOLEEN); fonction.setReturnType(ValueType.BOOLEEN); fonction.setCurrentParamType(ValueType.BOOLEEN);}
 }
 /*
  * Syntaxe des instructions.
@@ -236,7 +236,7 @@ void instruction() : {}
 
 void retourne() : {}
 {
-	<RETOURNE> expression() {fonction.retourne();}
+	<RETOURNE> expression() {fonction.retourne(expression.getFinalType());}
 }
 
 void conditionnelle() : {}
