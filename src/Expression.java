@@ -130,22 +130,30 @@ public class Expression implements Constants{
 	public void pushInt(int value)
 	{
 		pileType.push(ValueType.ENTIER);
-		System.out.println("Pushage de "+ValueType.ENTIER);
+		System.out.println("Pushage de "+ValueType.ENTIER+" int :"+value);
 		Yaka.yvm.iconst(value);
 	}
 	
 	public void pushType(String identLu) {
 		Ident ident = Yaka.tabIdent.chercheIdent(identLu);
-		if(ident == null) {
-			pileType.push(ValueType.ERREUR);
-			Yaka.yvm.ecrireErreur("Erreur dans le calcul de l'expresion (ident "+ identLu +" non trouvé.)");
+		IdFunct idFunct = Yaka.tabIdent.chercheFonction(identLu);
+		if(idFunct != null)
+		{
+			ValueType type = idFunct.getReturnType();
+			pileType.push(type);
+			System.out.println("Pushage de "+type+" de la fonction "+idFunct.getName());
 		}
-		else {
+		else if (ident != null){
 			ValueType type = ident.getValueType();
 			pileType.push(type);
 			System.out.println("Pushage de "+type+" de l'ident "+ident.getName());
 			ident.load();
 		}
+		else {
+			pileType.push(ValueType.ERREUR);
+			Yaka.yvm.ecrireErreur("Erreur dans le calcul de l'expresion (ident "+ identLu +" non trouvé.)");
+		}
+
 	}
 	
 	public ValueType getFinalType() {

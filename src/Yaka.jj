@@ -321,7 +321,7 @@ void valeur() : {}
 
 void argumentsFonction() : {}
 {
-	"("(expression(){ appelFonction.addArgument(expression.getFinalType()); }
+	"("(expression(){ appelFonction.initArguments(); appelFonction.addArgument(expression.getFinalType()); }
 	(","expression() { appelFonction.addArgument(expression.getFinalType()); } )*)?")"
 }
 

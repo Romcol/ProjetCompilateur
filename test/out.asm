@@ -153,6 +153,10 @@ sup:
 	;iconst 5
 	push word ptr 5
 
+	;istore -2
+	pop ax
+	mov word ptr [bp-2],ax
+
 	;lireEnt -4
 	lea dx, [bp-4]
 	push dx
@@ -176,6 +180,12 @@ sup:
 	;iconst 5
 	push word ptr 5
 
+	;call min
+	call min
+
+	;call max
+	call max
+
 	;iconst 2
 	push word ptr 2
 
@@ -184,6 +194,10 @@ sup:
 	pop ax
 	add ax,bx
 	push ax
+
+	;istore -6
+	pop ax
+	mov word ptr [bp-6],ax
 
 	;reserveRetour
 	sub sp,2

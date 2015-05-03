@@ -549,7 +549,7 @@ public class Yaka implements Constants, YakaConstants {
     case 40:
     case 51:
       expression();
-                          appelFonction.addArgument(expression.getFinalType());
+                          appelFonction.initArguments(); appelFonction.addArgument(expression.getFinalType());
       label_10:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {

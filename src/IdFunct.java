@@ -17,4 +17,12 @@ public class IdFunct implements Constants {
 		return this.params;
 	}
 	
+	public ValueType getReturnType(){
+		return this.returnType;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
 }
