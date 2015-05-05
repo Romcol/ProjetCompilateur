@@ -20,7 +20,7 @@ max:
 	mov word ptr [bp-6],ax
 
 	;iload -6
-	push word ptr [bp+-6]
+	push word ptr [bp-6]
 
 	;iload 4
 	push word ptr [bp+4]
@@ -40,7 +40,7 @@ max:
 	je SINON1
 
 	;iload -6
-	push word ptr [bp+-6]
+	push word ptr [bp-6]
 
 	;ireturn 8
 	pop ax
@@ -157,10 +157,12 @@ sup:
 	pop ax
 	mov word ptr [bp-2],ax
 
-	;lireEnt -4
-	lea dx, [bp-4]
-	push dx
-	call lirent
+	;iconst 7
+	push word ptr 7
+
+	;istore -4
+	pop ax
+	mov word ptr [bp-4],ax
 
 	;aLaLigne
 	call ligsuiv
@@ -169,13 +171,13 @@ sup:
 	sub sp,2
 
 	;iload -2
-	push word ptr [bp+-2]
+	push word ptr [bp-2]
 
 	;reserveRetour
 	sub sp,2
 
 	;iload -4
-	push word ptr [bp+-4]
+	push word ptr [bp-4]
 
 	;iconst 5
 	push word ptr 5
@@ -209,10 +211,10 @@ sup:
 	sub sp,2
 
 	;iload -2
-	push word ptr [bp+-2]
+	push word ptr [bp-2]
 
 	;iload -4
-	push word ptr [bp+-4]
+	push word ptr [bp-4]
 
 	;iconst 5
 	push word ptr 5
@@ -236,7 +238,7 @@ sup:
 	sub sp,2
 
 	;iload -2
-	push word ptr [bp+-2]
+	push word ptr [bp-2]
 
 	;iconst 2
 	push word ptr 2
@@ -248,7 +250,7 @@ sup:
 	push ax
 
 	;iload -4
-	push word ptr [bp+-4]
+	push word ptr [bp-4]
 
 	;call min
 	call min
@@ -264,7 +266,7 @@ sup:
 	call ligsuiv
 
 	;iload -6
-	push word ptr [bp+-6]
+	push word ptr [bp-6]
 
 	;ecrireEnt
 	call ecrent
@@ -273,7 +275,7 @@ sup:
 	call ligsuiv
 
 	;iload -8
-	push word ptr [bp+-8]
+	push word ptr [bp-8]
 
 	;ecrireBool
 	call ecrbool

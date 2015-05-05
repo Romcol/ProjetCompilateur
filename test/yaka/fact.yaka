@@ -1,0 +1,108 @@
+PROGRAMME test
+
+	(* -- Fonction carre -- *)
+	ENTIER FONCTION carre(ENTIER n)
+	VAR ENTIER res;
+	
+		res = n * n;
+
+		RETOURNE res;
+	FFONCTION
+	
+	(* -- Fonction fact -- *)
+	ENTIER FONCTION fact(ENTIER n)
+	VAR ENTIER nb,fact1;
+	VAR BOOLEEN fini;
+		
+		ALALIGNE;
+		ECRIRE("Entree fonction 'fact1' ");
+		
+		nb = n;
+		fact1 = 1;
+		fini = ( n = 0 );
+		TANTQUE (NON fini) FAIRE
+			fact1 = fact1 * n;
+			n = n - 1;
+			fini = ( n = 0 );
+			ECRIRE("."); (* Avancement du programme... *)
+		FAIT;
+		
+		ECRIRE(" FINI!");
+		ALALIGNE;
+		
+		RETOURNE fact1;
+	FFONCTION
+	
+	(* ----- Programme principal ----- *)
+	PRINCIPAL
+	VAR ENTIER n,nb,n2; 
+		
+		(* Demande la valeur *)
+		ECRIRE("Taper un nombre ( <=7 ) : ");
+		ALALIGNE;
+		LIRE(n);
+		ECRIRE(n);
+		ALALIGNE;
+		
+		SI (n = 7) ALORS
+			ALALIGNE;
+			ECRIRE("( Le 7 porte chance!! )");
+			ALALIGNE;
+		FSI;
+		
+		(* Vérification du n pour calcul de Factoriel *)
+		SI ( n <=7 ) ALORS	
+
+			nb = fact(n);
+			
+			ALALIGNE;
+			ECRIRE("Factoriel de ");
+			ECRIRE(n);
+			ECRIRE(" = ");
+			ECRIRE(nb);
+			
+			(* Test des SI imbriqués *)
+			SI (nb < 100) ALORS
+			
+				SI (nb < 50) ALORS
+					ECRIRE(" < 50");
+				SINON
+					ECRIRE(" < 100");
+				FSI;
+				
+			SINON (* >= 100 *)
+			
+				SI (nb > 500) ALORS
+					SI (nb > 1000) ALORS
+						ECRIRE(" > 1000");
+					SINON (* <= 1000 *)
+						ECRIRE(" > 500");
+					FSI;
+				SINON
+					ECRIRE(" >= 100");
+				FSI;
+				
+			FSI;
+
+			
+		SINON
+			ALALIGNE;
+			ECRIRE("/!\ Impossible de calculer le factoriel d'une valeur > 7 ! ");
+		FSI;
+		
+		(* Calcul du Carre *)
+		n2 = carre(n);
+			
+		ALALIGNE;
+		ECRIRE("Carre de ");
+		ECRIRE(n);
+		ECRIRE(" = ");
+		ECRIRE(n);
+		ECRIRE("^2 = ");
+		ECRIRE(n2);
+		
+		ALALIGNE;
+		
+	FPRINCIPAL
+
+FPROGRAMME
