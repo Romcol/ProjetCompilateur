@@ -6,7 +6,7 @@ public class YVM implements Constants{
 	protected OutputStream out;
 	
 	public YVM() {
-		this.out = Ecriture.ouvrir("test/out.asm");
+		this.out = Ecriture.ouvrir("test/asm/out.asm");
 	}
 
 	public void addVar(IdVar var) {
