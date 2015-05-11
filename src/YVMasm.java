@@ -34,13 +34,13 @@ public class YVMasm extends YVM{
 	
 	public void iload(int offset) {
 		super.iload(offset);
-		ecrire("push word ptr [bp+" + offset + "]");
+		ecrire("push word ptr [bp" + strOffset(offset) + "]");
 	}
 	
 	public void istore(int offset) {
 		super.istore(offset);
 		ecrire("pop ax");
-		ecrire("mov word ptr [bp"+offset+"],ax");
+		ecrire("mov word ptr [bp"+strOffset(offset)+"],ax");
 	}
 	
 	public void iadd() {
@@ -197,7 +197,7 @@ public class YVMasm extends YVM{
 	
 	public void lireEnt(int offset){
 		super.lireEnt(offset);
-		ecrire("lea dx, [bp"+offset+"]");
+		ecrire("lea dx, [bp"+strOffset(offset)+"]");
 		ecrire("push dx");
 		ecrire("call lirent");
 	}
@@ -261,7 +261,7 @@ public class YVMasm extends YVM{
 	{
 		super.ireturn(n);
 		ecrire("pop ax");
-		ecrire("mov [bp+"+n+"],ax");
+		ecrire("mov [bp"+strOffset(n)+"],ax");
 	}
 
 	public void call(String s)
@@ -273,5 +273,12 @@ public class YVMasm extends YVM{
 	public void reserveRetour(){
 		super.reserveRetour();
 		ecrire("sub sp,2");
+	}
+	
+	public String strOffset(int offset) {
+		if(offset < 0)
+			return "-" + Math.abs(offset);
+		else
+			return "+" + Math.abs(offset);
 	}
 }
